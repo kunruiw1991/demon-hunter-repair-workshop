@@ -1,4 +1,4 @@
-// js/game.js — KPop Demon Hunters Repair Workshop 3D (猎魔女团与呆萌蓝虎修复工坊 3D)
+// js/game.js — KPop Demon Hunters Repair Workshop 3D
 // Honmoon stage repair clinic for the 3 HUNTR/X girls, the 5 Saja Boys, Derpy the Blue Minhwa Tiger
 // and Sussie the Six-Eyed Magpie: randomized 3D damage decals, 16 tools (surface care + KPop Demon
 // Hunters specials + eczema cream + 3D diaper + Honmoon balm + 3-point rhythm stethoscope + wake-up),
@@ -34,53 +34,53 @@ const std = (o) => {
 /* ============================== Data: characters, tools, problems ============================== */
 const CHAR_IDS = [...CHARACTER_ORDER];
 const GROUP_WHO = {
-  huntrx: 'HUNTR/X 猎魔女团',
-  saja_boys: 'Saja Boys 狮男团',
-  minhwa: '民画福虎与喜鹊',
+  huntrx: 'HUNTR/X Girls',
+  saja_boys: 'Saja Boys',
+  minhwa: 'Derpy Tiger & Sussie',
 };
-// Reverse lookup: voice clip file -> the exact Mandarin line it speaks (so bubbles match the audio).
+// Reverse lookup: voice clip file -> the exact English line it speaks (so bubbles match the audio).
 const LINE_BY_FILE = Object.fromEntries(Object.entries(VOICE_CLIPS).map(([text, file]) => [file, text]));
 const lineFor = (key, fallback = '') => LINE_BY_FILE[VOICE_BY_KEY[key]] || fallback;
 
 const TOOLS = [
-  { id: 'brush', icon: '🧹', name: '软毛刷', hold: true, tip: '按住轻轻刷掉灰尘和蛛网' },
-  { id: 'sponge', icon: '🧽', name: '泡泡海绵', hold: true, tip: '按住搓泡泡，洗掉泥巴点' },
-  { id: 'dryer', icon: '💨', name: '吹风机', hold: true, tip: '按住吹干湿湿的水滴' },
-  { id: 'tweezers', icon: '🥢', name: '小镊子', tip: '点一下夹走暗影刺球' },
-  { id: 'needle', icon: '🪡', name: '金线缝衣针', tip: '点四下缝好开线，也能把长辫和黑笠缝回去' },
-  { id: 'comb', icon: '🪮', name: '顺发造型梳', hold: true, tip: '按住把乱糟糟的头发梳顺' },
-  { id: 'patch', icon: '🩹', name: '刺绣补丁', tip: '点三下贴牢刺绣补丁' },
-  { id: 'moisture', icon: '🧴', name: '保湿霜', hold: true, tip: '按住轻轻涂抹红红的湿疹' },
-  { id: 'diaper', icon: '🩲', name: '小尿布', tip: '点一下换上干爽的小尿布' },
-  { id: 'honmoon_balm', icon: '✨', name: '魂门金印膏', hold: true, tip: '按住涂抹，把裂纹封成金色魂门印记' },
-  { id: 'polish', icon: '🧤', name: '宝石抛光布', hold: true, tip: '按住擦亮法器，或扶正花盆' },
-  { id: 'gem_replacer', icon: '🔘', name: '闪亮耳返/宝石', tip: '点一下装回耳返和眼眸宝石' },
-  { id: 'cotton', icon: '☁️', name: '云朵蓬蓬棉', tip: '点四下塞进云朵棉花' },
-  { id: 'airbrush', icon: '🖌️', name: '舞台焕彩喷笔', hold: true, tip: '按住喷回闪亮的舞台颜色' },
-  { id: 'checkup', icon: '🩺', name: '律动听诊器', tip: '点一点三个发光小圈圈' },
-  { id: 'heart', icon: '💝', name: '魂门舞台唤醒', tip: '点一下伙伴，唤醒舞台！' },
+  { id: 'brush', icon: '🧹', name: 'Soft Brush', hold: true, tip: 'Hold to gently brush away dust and cobwebs' },
+  { id: 'sponge', icon: '🧽', name: 'Bubble Sponge', hold: true, tip: 'Hold to scrub bubbles and wash off the mud' },
+  { id: 'dryer', icon: '💨', name: 'Warm Dryer', hold: true, tip: 'Hold to blow the wet spots dry' },
+  { id: 'tweezers', icon: '🥢', name: 'Tweezers', tip: 'Tap to pluck out the shadow burrs' },
+  { id: 'needle', icon: '🪡', name: 'Gold-Thread Needle', tip: 'Tap 4 times to stitch seams, braids and Gat hats back on' },
+  { id: 'comb', icon: '🪮', name: 'Styling Comb', hold: true, tip: 'Hold to comb the frizzy hair smooth' },
+  { id: 'patch', icon: '🩹', name: 'Embroidered Patch', tip: 'Tap 3 times to press the patch on tight' },
+  { id: 'moisture', icon: '🧴', name: 'Moisture Cream', hold: true, tip: 'Hold to gently rub cream on the red rash' },
+  { id: 'diaper', icon: '🩲', name: 'Cozy Diaper', tip: 'Tap to put on a fresh, dry diaper' },
+  { id: 'honmoon_balm', icon: '✨', name: 'Golden Honmoon Balm', hold: true, tip: 'Hold to seal the cracks into a golden Honmoon mark' },
+  { id: 'polish', icon: '🧤', name: 'Polishing Cloth', hold: true, tip: 'Hold to polish the weapon or stand the flowerpot up' },
+  { id: 'gem_replacer', icon: '🔘', name: 'Gem Replacer', tip: 'Tap to put the ear-monitor and eye gem back' },
+  { id: 'cotton', icon: '☁️', name: 'Cloud Cotton', tip: 'Tap 4 times to stuff in fluffy cloud cotton' },
+  { id: 'airbrush', icon: '🖌️', name: 'Idol Airbrush', hold: true, tip: 'Hold to spray the bright stage colors back' },
+  { id: 'checkup', icon: '🩺', name: 'Rhythm Stethoscope', tip: 'Tap the three glowing circles' },
+  { id: 'heart', icon: '💝', name: 'Honmoon Heart Wake-Up', tip: 'Tap your friend to wake up the stage!' },
 ];
 const TOOL = Object.fromEntries(TOOLS.map((t) => [t.id, t]));
 const TOOL_ALIAS = { cloth: 'polish', glove: 'polish', button: 'gem_replacer', gem: 'gem_replacer', paint: 'airbrush', spray: 'airbrush', balm: 'honmoon_balm', cream: 'moisture', stethoscope: 'checkup' };
 const normTool = (id) => (id == null ? null : (TOOL[id] ? id : TOOL_ALIAS[id] || id));
 
 const DMG = {
-  mud: { icon: '🟤', tool: 'sponge', label: '泥巴点' },
-  wet: { icon: '💧', tool: 'dryer', label: '湿水水滴' },
-  dust: { icon: '🕸️', tool: 'brush', label: '灰尘蛛网' },
-  burr: { icon: '🌑', tool: 'tweezers', label: '暗影刺球' },
-  tear: { icon: '🧵', tool: 'needle', label: '演出服开线' },
-  tangle: { icon: '🪮', tool: 'comb', label: '乱糟糟头发/绒毛' },
-  patch: { icon: '🩹', tool: 'patch', label: '衣服破洞' },
-  eczema: { icon: '🔴', tool: 'moisture', label: '红红的湿疹' },
-  wet_pants: { icon: '🩲', tool: 'diaper', label: '尿湿裤子' },
-  demon_mark: { icon: '🔮', tool: 'honmoon_balm', label: '猎魔印记裂纹' },
-  braid_gat: { icon: '🎀', tool: 'needle', label: '散乱长辫与黑笠' },
-  weapon_prop: { icon: '🗡️', tool: 'polish', label: '暗淡法器' },
-  eye_gem: { icon: '🔘', tool: 'gem_replacer', label: '掉落耳返/眼眸宝石' },
-  flat_padding: { icon: '☁️', tool: 'cotton', label: '扁塌填充' },
-  faded_outfit: { icon: '🎨', tool: 'airbrush', label: '褪色演出服' },
-  checkup: { icon: '🩺', tool: 'checkup', label: '律动听诊器' },
+  mud: { icon: '🟤', tool: 'sponge', label: 'Mud Splatters' },
+  wet: { icon: '💧', tool: 'dryer', label: 'Wet Spots' },
+  dust: { icon: '🕸️', tool: 'brush', label: 'Dust & Cobwebs' },
+  burr: { icon: '🌑', tool: 'tweezers', label: 'Shadow Burrs' },
+  tear: { icon: '🧵', tool: 'needle', label: 'Torn Seams' },
+  tangle: { icon: '🪮', tool: 'comb', label: 'Frizzy Hair & Fur' },
+  patch: { icon: '🩹', tool: 'patch', label: 'Costume Hole' },
+  eczema: { icon: '🔴', tool: 'moisture', label: 'Red Eczema Rash' },
+  wet_pants: { icon: '🩲', tool: 'diaper', label: 'Wet Pants' },
+  demon_mark: { icon: '🔮', tool: 'honmoon_balm', label: 'Cracked Demon Mark' },
+  braid_gat: { icon: '🎀', tool: 'needle', label: 'Loose Braid & Gat Hat' },
+  weapon_prop: { icon: '🗡️', tool: 'polish', label: 'Dull Weapon' },
+  eye_gem: { icon: '🔘', tool: 'gem_replacer', label: 'Lost Ear-Monitor & Eye Gem' },
+  flat_padding: { icon: '☁️', tool: 'cotton', label: 'Flat Padding' },
+  faded_outfit: { icon: '🎨', tool: 'airbrush', label: 'Faded Stage Colors' },
+  checkup: { icon: '🩺', tool: 'checkup', label: 'Rhythm Stethoscope' },
 };
 const DMG_ALIAS = { ear: 'braid_gat', pendant: 'weapon_prop', dull_weapon_flowerpot: 'weapon_prop', dull_weapon: 'weapon_prop', flowerpot: 'weapon_prop', eye: 'eye_gem', missing_earmonitor_gem: 'eye_gem', flat: 'flat_padding', faded: 'faded_outfit' };
 const normDmg = (t) => (DMG[t] ? t : DMG_ALIAS[t] || t);
@@ -88,16 +88,16 @@ const DMG_ORDER = ['dust', 'mud', 'wet', 'burr', 'tear', 'tangle', 'patch', 'ecz
 // Which part comes loose for the `braid_gat` surprise (Rumi's dragon braid, Jinu's Gat, Sussie's mini Gat, Baby's beanie...)
 const LOOSE_PART = { rumi: 'tail', derpy_tiger: 'tail' };
 
-const CHEERS = ['啊，好多啦！', '耶，谢谢你！', '这样好舒服呀！', '好开心！', '你是最棒的小修复师！', '哇，亮晶晶！', '魂门之光更亮啦！'];
-const TICKLES = ['嘻嘻，好痒呀！', '你好，小修复师！', '啵！', '咯咯咯！', '一起唱歌吧！'];
+const CHEERS = ['Ahh, much better!', 'Yay, thank you!', 'That feels so nice!', 'So happy!', 'You are the best little fixer!', 'Wow, so sparkly!', 'The Honmoon light is brighter!'];
+const TICKLES = ['Hee hee, that tickles!', 'Hello, little fixer!', 'Boop!', 'Giggle giggle!', "Let's sing together!"];
 
 const DRESS = [
-  ['lightstick', '🔦', 'K-pop 应援棒'],
-  ['honmoon_crown', '👑', '金色魂门王冠'],
-  ['norigae', '🎀', '韩式 Norigae 挂饰'],
-  ['headset', '🎧', '舞台耳麦'],
-  ['sunglasses', '🕶️', '墨镜'],
-  ['flower_crown', '🌸', '花环'],
+  ['lightstick', '🔦', 'K-pop Lightstick'],
+  ['honmoon_crown', '👑', 'Golden Honmoon Crown'],
+  ['norigae', '🎀', 'Norigae Charm'],
+  ['headset', '🎧', 'Stage Headset'],
+  ['sunglasses', '🕶️', 'Sunglasses'],
+  ['flower_crown', '🌸', 'Flower Crown'],
 ];
 const DRESS_IDS = DRESS.map((d) => d[0]);
 
@@ -208,6 +208,10 @@ const textTex = (text, font, color, glow, w = 1024, h = 160) => {
   const t = canvasTex(w, h, (g) => {
     g.clearRect(0, 0, w, h);
     g.font = font; g.textAlign = 'center'; g.textBaseline = 'middle';
+    // Auto-shrink long English labels so they never clip at the canvas edge.
+    const px = parseFloat((font.match(/(\d+(?:\.\d+)?)px/) || [0, 0])[1]);
+    const tw = g.measureText(text).width;
+    if (px && tw > w * .92) g.font = font.replace(/\d+(?:\.\d+)?px/, `${Math.floor(px * (w * .92) / tw)}px`);
     g.shadowColor = glow; g.shadowBlur = 28; g.fillStyle = color; g.fillText(text, w / 2, h / 2 + 4);
     g.shadowBlur = 0; g.fillText(text, w / 2, h / 2 + 4);
   });
@@ -245,7 +249,7 @@ const honmoonInner = new THREE.Mesh(new THREE.TorusGeometry(1.85, 0.022, 12, 120
 honmoonInner.position.copy(honmoon.position); room.add(honmoonInner);
 const honmoonGlow = new THREE.Sprite(new THREE.SpriteMaterial({ map: TEX.glow, transparent: true, depthWrite: false, opacity: .75, blending: THREE.AdditiveBlending, color: '#ffc46b' }));
 honmoonGlow.position.set(0, 2.35, -3.2); honmoonGlow.scale.set(7.5, 7.5, 1); room.add(honmoonGlow);
-for (let i = 0; i < 4; i++) { // four tiger-crest medallions on the ring (Saingeom 四寅)
+for (let i = 0; i < 4; i++) { // four tiger-crest medallions on the ring (Saingeom four tigers)
   const a = i * Math.PI / 2 + Math.PI / 4;
   const m = new THREE.Mesh(new THREE.OctahedronGeometry(.16, 0), honmoonMat);
   m.scale.set(1, 1, .4); m.position.set(Math.cos(a) * 2.25, 2.35 + Math.sin(a) * 2.25, -3.08); room.add(m);
@@ -253,7 +257,7 @@ for (let i = 0; i < 4; i++) { // four tiger-crest medallions on the ring (Sainge
 // Neon signage
 const sign1 = new THREE.Mesh(new THREE.PlaneGeometry(4.6, .72), new THREE.MeshBasicMaterial({ map: textTex('HUNTR/X ✦ SAJA BOYS', '800 104px ui-rounded,system-ui,sans-serif', '#ff7ac8', '#ff2fa0'), transparent: true, depthWrite: false }));
 sign1.position.set(-4.6, 4.9, -3.2); room.add(sign1);
-const sign2 = new THREE.Mesh(new THREE.PlaneGeometry(4.0, .66), new THREE.MeshBasicMaterial({ map: textTex('魂门修复工坊 3D', '800 110px ui-rounded,system-ui,sans-serif', '#8ff7ff', '#22d3ee'), transparent: true, depthWrite: false }));
+const sign2 = new THREE.Mesh(new THREE.PlaneGeometry(4.0, .66), new THREE.MeshBasicMaterial({ map: textTex('HONMOON REPAIR SHOP 3D', '800 84px ui-rounded,system-ui,sans-serif', '#8ff7ff', '#22d3ee'), transparent: true, depthWrite: false }));
 sign2.position.set(4.6, 4.9, -3.2); room.add(sign2);
 
 // Round stage riser + LED rim + rotating turntable top
@@ -322,7 +326,7 @@ for (let i = 0; i < 26; i++) { const gem = new THREE.Mesh(new THREE.OctahedronGe
 const cloth = new THREE.Mesh(new THREE.BoxGeometry(.34, .03, .26), std({ color: '#fbbf24', roughness: .95 })); cloth.position.set(.2, .85, .3); cloth.rotation.y = .3; desk.add(cloth);
 desk.traverse((o) => { if (o.isMesh) o.castShadow = true; });
 
-// Honmoon Showcase Stage (魂门星光展台): two golden tiers with six star pedestals (right side)
+// Honmoon Showcase Stage: two golden tiers with six star pedestals (right side)
 const showcase = new THREE.Group(); showcase.position.set(3.3, 0, -1.9); room.add(showcase);
 const tierMat = std({ color: '#f6c453', emissive: '#b8860b', emissiveIntensity: .22, roughness: .4, metalness: .22 });
 const SHELF_Y = [1.25, 2.3];
@@ -332,7 +336,7 @@ SHELF_Y.forEach((y, ti) => {
   for (let i = 0; i < 3; i++) { const ped = new THREE.Mesh(new THREE.CylinderGeometry(.3, .34, .06, 32), std({ color: '#fde68a', emissive: '#f59e0b', emissiveIntensity: .35, roughness: .4 })); ped.position.set(-1.0 + i, y + .09, .05); showcase.add(ped); }
   [-1.5, 1.5].forEach((dx) => { const post = new THREE.Mesh(new THREE.BoxGeometry(.1, ti === 0 ? 1.25 : 1.0, .1), tierMat); post.position.set(dx, y - (ti === 0 ? .62 : .5), -.3); showcase.add(post); });
 });
-const shelfSign = new THREE.Mesh(new THREE.PlaneGeometry(3.0, .5), new THREE.MeshBasicMaterial({ map: textTex('✦ 魂门星光展台 ✦', '800 96px ui-rounded,system-ui,sans-serif', '#fff1b8', '#ffb020'), transparent: true, depthWrite: false }));
+const shelfSign = new THREE.Mesh(new THREE.PlaneGeometry(3.0, .5), new THREE.MeshBasicMaterial({ map: textTex('✦ HONMOON SHOWCASE ✦', '800 78px ui-rounded,system-ui,sans-serif', '#fff1b8', '#ffb020'), transparent: true, depthWrite: false }));
 shelfSign.position.set(0, 3.05, -.2); showcase.add(shelfSign);
 const SHELF_SPOTS = [];
 SHELF_Y.forEach((y) => { for (let i = 0; i < 3; i++) SHELF_SPOTS.push(v3(3.3 - 1.0 + i, y + .12, -1.9 + .05)); });
@@ -483,16 +487,16 @@ function playFartSfx(mega = false) {
     setTimeout(() => chime([523, 659, 784, 1047], .12, .045), 320);
   }
 }
-// Bundled zh-CN-XiaoyiNeural clips play on every device; device speech is only a fallback for unbundled lines.
+// Bundled en-US edge-tts clips (Ana / Guy / Christopher) play on every device; device speech is only a fallback for unbundled lines.
 let voiceChoices = [];
 function refreshVoices() { if ('speechSynthesis' in window) voiceChoices = speechSynthesis.getVoices(); }
 if ('speechSynthesis' in window) { refreshVoices(); speechSynthesis.addEventListener('voiceschanged', refreshVoices); }
 function gentleVoice() {
-  const mandarin = voiceChoices.filter((v) => /^(zh|cmn)(?:-|_|$)/i.test(v.lang) && !/^zh[-_]HK/i.test(v.lang));
-  const preferred = ['Xiaoyi', 'Xiaoxiao', 'HsiaoChen', 'HsiaoYu', 'Google 普通话', 'Tingting', 'Meijia'];
+  const english = voiceChoices.filter((v) => /^en(?:-|_|$)/i.test(v.lang));
+  const preferred = ['Ana', 'Aria', 'Jenny', 'Samantha', 'Google US English', 'Zira'];
   const score = (v) => {
     const rank = preferred.findIndex((name) => v.name.toLowerCase().includes(name.toLowerCase()));
-    return (rank < 0 ? 0 : (preferred.length - rank) * 100) + (/natural|premium|enhanced|neural/i.test(v.name) ? 30 : 0) + (/^(zh[-_]CN|cmn[-_]Hans[-_]CN)$/i.test(v.lang) ? 10 : 0);
+    return (rank < 0 ? 0 : (preferred.length - rank) * 100) + (/natural|premium|enhanced|neural/i.test(v.name) ? 30 : 0) + (/^en[-_]US$/i.test(v.lang) ? 10 : 0);
   };
   return mandarin.sort((a, b) => score(b) - score(a))[0];
 }
@@ -501,7 +505,7 @@ function stopSpeech() {
   if (spokenClip) { spokenClip.pause(); spokenClip = null; }
   if ('speechSynthesis' in window) { try { speechSynthesis.cancel(); } catch (_) { /* noop */ } }
 }
-// say('rumi-hello') plays the bundled clip; say('任意中文') falls back to the clip keyed by text or device TTS.
+// say('rumi-hello') plays the bundled clip; say('any English text') falls back to the clip keyed by text or device TTS.
 function say(keyOrText) {
   if (!soundOn || !keyOrText || game.paused) return;
   stopSpeech();
@@ -520,7 +524,7 @@ function speakDevice(text) {
   try {
     const u = new SpeechSynthesisUtterance(text); u.rate = .95; u.pitch = 1.15; u.volume = .8;
     refreshVoices(); const voice = gentleVoice();
-    if (voice) { u.voice = voice; u.lang = voice.lang; } else u.lang = 'zh-CN';
+    if (voice) { u.voice = voice; u.lang = voice.lang; } else u.lang = 'en-US';
     speechSynthesis.speak(u);
   } catch (_) { /* speech unavailable */ }
 }
@@ -537,8 +541,8 @@ const raycaster = new THREE.Raycaster();
 const tmpV = new THREE.Vector3(), tmpV2 = new THREE.Vector3(), tmpQ = new THREE.Quaternion(), tmpBox = new THREE.Box3(), tmpM = new THREE.Matrix4();
 
 function whoOf(meta) { return meta.who || meta.title || GROUP_WHO[normalizeCategoryKey(meta.category || meta.group)] || ''; }
-function helloOf(meta) { return lineFor(`${meta.id}-hello`, meta.hello || '你好呀！帮我修一修吧！'); }
-function thanksOf(meta) { return lineFor(`${meta.id}-thanks`, meta.thanks || '谢谢你，小修复师！'); }
+function helloOf(meta) { return lineFor(`${meta.id}-hello`, meta.hello || 'Hi there! Can you fix me up?'); }
+function thanksOf(meta) { return lineFor(`${meta.id}-thanks`, meta.thanks || 'Thank you, little fixer!'); }
 
 // Bounding box of `obj`'s visible subtree expressed in obj's own local frame.
 function localBounds(obj) {
@@ -954,7 +958,7 @@ function renderFartBtn() {
   $('fartCount').textContent = `${game.fartCharge}/10`;
   $('fartFill').style.width = `${Math.min(100, (game.fartCharge / 10) * 100)}%`;
   $('fartIcon').textContent = mega ? '🍄' : '💨';
-  $('fartLabel').textContent = mega ? '蘑菇云大屁!' : '放小屁';
+  $('fartLabel').textContent = mega ? 'MEGA Mushroom Toot!' : 'Toot!';
   btn.classList.toggle('mega', mega);
 }
 function triggerFart() {
@@ -966,8 +970,8 @@ function triggerFart() {
     spawnSmallFart3D();
     game.wobble = .11;
     renderFartBtn();
-    if (game.fartCharge === 10) { bubble('⚡ ' + lineFor('fart-ready', '十个小屁蓄满啦！再按一下发射超级蘑菇云大屁！'), 3200); say('fart-ready'); }
-    else bubble(`💨 噗噗~ 放了个小屁！(${game.fartCharge}/10)` + pick(['', ' 嘻嘻！', ' 好臭呀！', ' 咯咯咯！']), 1800);
+    if (game.fartCharge === 10) { bubble('⚡ ' + lineFor('fart-ready', 'Ten little toots all charged up! Press once more to launch the MEGA mushroom toot!'), 3200); say('fart-ready'); }
+    else bubble(`💨 Pfft~ a little toot! (${game.fartCharge}/10)` + pick(['', ' Hee hee!', ' So stinky!', ' Giggle giggle!']), 1800);
     return { type: 'small', charge: game.fartCharge, activeMushroomClouds: fartClouds.filter((c) => c.userData.isMega).length };
   }
   game.fartCharge = 0;
@@ -977,7 +981,7 @@ function triggerFart() {
   game.camOverrideUntil = performance.now() + 3600; // wall-clock so slow software GL doesn't stretch the pull-back
   renderFartBtn();
   addStars(1, cloud.position.clone().add(v3(0, 1.8, 0)));
-  bubble('🍄 ' + lineFor('fart-mega', '轰隆隆！超级蘑菇云大屁发射啦！太搞笑啦！'), 3800); say('fart-mega');
+  bubble('🍄 ' + lineFor('fart-mega', 'KABOOM! MEGA mushroom toot launched! That was so silly!'), 3800); say('fart-mega');
   return { type: 'mega', charge: game.fartCharge, activeMushroomClouds: fartClouds.filter((c) => c.userData.isMega).length };
 }
 
@@ -1254,7 +1258,7 @@ function dmgIcon(type) {
   return DMG[type].icon;
 }
 function dmgLabel(type) {
-  if (type === 'weapon_prop' && game.prop && game.prop.isFlowerpot) return '翻倒花盆';
+  if (type === 'weapon_prop' && game.prop && game.prop.isFlowerpot) return 'Tipped Flowerpot';
   return DMG[type].label;
 }
 function renderTicket() {
@@ -1302,7 +1306,7 @@ function findDamage(type, instant = false) {
   } else if (d.anchor) {
     burst(d.anchor.getWorldPosition(v3()), 6);
   }
-  bubble(`试试 ${TOOL[toolId].icon} ${TOOL[toolId].name} 吧！`, 2200);
+  bubble(`Try the ${TOOL[toolId].icon} ${TOOL[toolId].name}!`, 2200);
   return true;
 }
 let bubbleTimer = 0;
@@ -1380,13 +1384,13 @@ function fixed(d, where) {
       });
       game.spinTo = Math.round(turntable.rotation.y / (Math.PI * 2)) * Math.PI * 2;
       renderTicket(); renderTools(); selectTool('checkup');
-      bubble('🩺 ' + lineFor('checkup-start', '最后做个律动听诊检查吧！用听诊器点一点三个发光小圈圈。'), 5000);
+      bubble('🩺 ' + lineFor('checkup-start', 'Last step, a rhythm checkup! Tap the three glowing circles with the stethoscope.'), 5000);
       say('checkup-start');
       return;
     }
     renderTools();
     const visitVersion = game.visitVersion;
-    setTimeout(() => { if (game.visitVersion !== visitVersion || game.state !== 'repair') return; bubble('💝 ' + lineFor('heart-ready', '全部修好啦！现在点一点魂门舞台唤醒爱心，让我们重返闪耀舞台吧！'), 4600); say('heart-ready'); }, 700);
+    setTimeout(() => { if (game.visitVersion !== visitVersion || game.state !== 'repair') return; bubble('💝 ' + lineFor('heart-ready', 'All fixed! Now tap the Honmoon heart to wake up the stage, and let\'s shine again!'), 4600); say('heart-ready'); }, 700);
   }
 }
 function removeDecal(d, flyTo) {
@@ -1413,7 +1417,7 @@ function restoreLoosePart(d) {
   e.from = { p: e.obj.position.clone(), q: e.obj.quaternion.clone(), s: e.obj.scale.clone() };
   tone(700, 1100, .2, .04, 'triangle'); noise(3000, 3, .03, .12);
   for (let i = 0; i < 4; i++) tone(880 + i * 120, 1320 + i * 120, .1, .03, 'triangle', .12 + i * .14);
-  bubble(game.sel === 'rumi' ? '🎀 紫龙长辫编回去啦，闪闪发光！' : game.sel === 'jinu' || game.sel === 'sussie_magpie' ? '🎩 黑笠端端正正戴好啦！' : '🎀 缝回去啦，又神气又帅气！', 2400);
+  bubble(game.sel === 'rumi' ? '🎀 The purple dragon braid is back and sparkling!' : game.sel === 'jinu' || game.sel === 'sussie_magpie' ? '🎩 The Gat hat sits straight and proud!' : '🎀 Stitched back on, looking sharp and cool!', 2400);
   fixed(d, e.obj.getWorldPosition(v3()));
   return true;
 }
@@ -1442,7 +1446,7 @@ function holdTool(x, y, dt) {
     if (hit) {
       loopNoise('spray', true, 3200, 'highpass', .03);
       if (Math.random() < .5) spawn(TEX.spray, hit.point.clone().add(v3(rnd(-.05, .05), rnd(-.05, .05), .05)), { vel: v3(rnd(-.1, .1), rnd(-.05, .1), rnd(-.1, .1)), life: 1, size: .12, grow: 1.2, opacity: .5, color: pick(['#ffd1e8', '#d6c8ff', '#fff1b8', '#b8f5ff']) });
-      if (d) { game.faded = Math.min(1, game.faded + dt / 2.4); updateFadedColors(); if (game.faded >= 1) { fixed(d, hit.point); if (game.critter.setForm) game.critter.setForm(game.form); bubble('🎨 舞台颜色又闪亮啦，像新的一样！', 2200); } }
+      if (d) { game.faded = Math.min(1, game.faded + dt / 2.4); updateFadedColors(); if (game.faded >= 1) { fixed(d, hit.point); if (game.critter.setForm) game.critter.setForm(game.form); bubble('🎨 The stage colors are bright again, good as new!', 2200); } }
     } else loopNoise('spray', false);
     return;
   }
@@ -1458,8 +1462,8 @@ function holdTool(x, y, dt) {
         if (Math.random() < .25) burst(wp, 1, TEX.sparkle, .3, '#ffe08a');
         if (game.propShine >= 1) {
           burst(wp, 14, TEX.sparkle, .6, '#ffe08a'); spawn(TEX.ring, wp.clone(), { life: 1, size: .14, grow: 3.5, opacity: .9, add: true, color: '#ffd166' });
-          if (game.prop.isFlowerpot) { bubble('🪴 ' + lineFor('flowerpot-fixed', '哇，青花瓷牡丹花盆扶正啦，大牡丹花开得好漂亮呀！'), 3000); say('flowerpot-fixed'); }
-          else bubble('🗡️ 法器擦得亮晶晶，闪耀魂门金光！', 2200);
+          if (game.prop.isFlowerpot) { bubble('🪴 ' + lineFor('flowerpot-fixed', 'Wow, the porcelain peony flowerpot is standing up again, and the big peonies look so pretty!'), 3000); say('flowerpot-fixed'); }
+          else bubble('🗡️ The weapon is polished and glowing with Honmoon gold!', 2200);
           fixed(d, wp);
           if (game.critter.setForm) game.critter.setForm(game.form);
         }
@@ -1479,7 +1483,7 @@ function holdTool(x, y, dt) {
     if (d.hp <= 0) {
       sealHonmoonCrest(d);
       chime([784, 988, 1175, 1568], .1, .05);
-      bubble('✨ ' + lineFor('honmoon-sealed', '涂上魂门金印膏，猎魔印记变成闪闪发光的金色魂门徽章啦！'), 3000); say('honmoon-sealed');
+      bubble('✨ ' + lineFor('honmoon-sealed', 'Golden Honmoon Balm! The cracked demon mark is now a shiny golden Honmoon crest!'), 3000); say('honmoon-sealed');
       fixed(d, p);
     }
     return;
@@ -1506,8 +1510,8 @@ function holdTool(x, y, dt) {
       const hit = { point: p, normal: tmpV2.set(0, 0, 1).applyQuaternion(d.anchor.getWorldQuaternion(tmpQ)).clone(), object: d.anchor.parent || game.critter };
       if (hit.object && hit.object !== scene) { const w = addDamage('wet', hit); w.anchor.scale.setScalar(.9); game.total++; renderTicket(); }
     }
-    if (type === 'eczema') { burst(p, 8, TEX.sparkle, .5, '#9ef2d2'); bubble('🧴 ' + lineFor('eczema-healed', '涂上凉凉的保湿霜，红红的湿疹消退啦，小皮肤滑溜溜！'), 2600); say('eczema-healed'); }
-    if (type === 'tangle') bubble('🪮 头发顺滑又蓬松，舞台造型完成！', 2000);
+    if (type === 'eczema') { burst(p, 8, TEX.sparkle, .5, '#9ef2d2'); bubble('🧴 ' + lineFor('eczema-healed', 'A little cool moisture cream, and the red rash is all gone. Smooth as silk!'), 2600); say('eczema-healed'); }
+    if (type === 'tangle') bubble('🪮 Hair smooth and fluffy, stage look complete!', 2000);
     fixed(d, p);
   }
 }
@@ -1528,7 +1532,7 @@ function tapTool(x, y) {
       burst(pos, 8, TEX.heart); removeDecal(d);
       tone(440, 440, .12, .05, 'sine'); tone(440, 440, .12, .05, 'sine', .18);
       fixed(d, pos);
-      if (game.damages.some((q) => q.type === 'checkup' && !q.done)) bubble(pick(['💓 咚咚、咚咚，节拍很有力！', '💗 律动满分，再听一处！', '🎵 心跳跟着节奏跳舞啦！']), 1800);
+      if (game.damages.some((q) => q.type === 'checkup' && !q.done)) bubble(pick(['💓 Thump-thump, thump-thump, a strong beat!', '💗 Perfect rhythm, one more spot!', '🎵 The heartbeat is dancing to the music!']), 1800);
       return true;
     }
   }
@@ -1540,7 +1544,7 @@ function tapTool(x, y) {
       attachDiaperMesh(game.critter, game.meta, true);
       tone(520, 780, .14, .05, 'triangle'); tone(780, 1040, .16, .045, 'sine', .1);
       burst(p, 10, TEX.sparkle);
-      bubble('🩲 ' + lineFor('diaper-fitted', '擦干小屁股，换上干爽洁白的小尿布啦！软乎乎真舒服！'), 2800); say('diaper-fitted');
+      bubble('🩲 ' + lineFor('diaper-fitted', 'All dried off and into a fresh, cozy diaper! So soft and comfy!'), 2800); say('diaper-fitted');
       fixed(d, p);
       return true;
     }
@@ -1553,7 +1557,7 @@ function tapTool(x, y) {
         const patch = new THREE.Mesh(new THREE.CircleGeometry(.105, 6), std({ color: game.meta.color || '#8b5cf6', roughness: .85 }));
         patch.position.z = .012; patch.userData.noDecal = true; g.add(patch);
         const crest = new THREE.Mesh(new THREE.OctahedronGeometry(.035, 0), M.gold); crest.scale.set(1, 1, .3); crest.position.z = .02; crest.userData.noDecal = true; g.add(crest);
-        bubble('🩹 刺绣补丁贴上啦！再按两下缝牢金线。', 2400);
+        bubble('🩹 Patch is on! Press twice more to stitch it tight.', 2400);
       }
       const stitch = new THREE.Mesh(new THREE.TorusGeometry(.088, .006, 6, 24, Math.PI * 2 / 3), M.gold);
       stitch.position.z = .018; stitch.rotation.z = (n - 1) * Math.PI * 2 / 3; stitch.userData.noDecal = true; g.add(stitch);
@@ -1583,7 +1587,7 @@ function tapTool(x, y) {
       if (g.userData.stitches >= 4) {
         const slit = g.getObjectByName('slit'), puffs = g.getObjectByName('puffs');
         const t0 = performance.now(); const step = () => { const k = Math.min(1, (performance.now() - t0) / 600); if (slit) slit.scale.set(1 - k, 1 - k, .35 * (1 - k) + .001); if (puffs) puffs.scale.setScalar(1 - k); if (k < 1) requestAnimationFrame(step); };
-        step(); bubble('🪡 金线缝好啦，演出服完美如新！', 2000); fixed(d, p);
+        step(); bubble('🪡 Gold thread all stitched, the costume is perfect again!', 2000); fixed(d, p);
       }
       return true;
     }
@@ -1597,7 +1601,7 @@ function tapTool(x, y) {
       const t0 = performance.now(); const step = () => { const k = Math.min(1, (performance.now() - t0) / 500); const s = k < .7 ? k / .7 * 1.2 : 1.2 - (k - .7) / .3 * .2; eg.scale.setScalar(Math.max(.01, s * s0)); sock.scale.multiplyScalar(.8); if (k < 1) requestAnimationFrame(step); else { eg.scale.setScalar(s0); sock.visible = false; } };
       step(); tone(500, 250, .14, .06); tone(1200, 1400, .08, .03, 'sine', .1);
       const p = d.anchor.getWorldPosition(v3()); burst(p, 8, TEX.sparkle, .4, '#fff1b8');
-      bubble('🔘 闪亮的眼眸宝石装回去啦，眼睛亮晶晶！', 2200);
+      bubble('🔘 The shiny eye gem is back, eyes all sparkly!', 2200);
       fixed(d, p); return true;
     }
   }
@@ -1609,7 +1613,7 @@ function tapTool(x, y) {
       d.hp = Math.max(0, d.hp - 1); game.flatTarget = 1 - d.hp / 4;
       spawn(TEX.cotton, from, { to: target, life: .7, size: .22, onArrive: () => { burst(target, 4, TEX.soft, .3, '#fffdf7'); game.wobble = .08; } });
       tone(300 + (4 - d.hp) * 70, 520 + (4 - d.hp) * 70, .25, .04); noise(500, .7, .04, .3, 'lowpass');
-      if (d.hp <= 0) { bubble('☁️ 云朵棉花塞满啦，又蓬又软！', 2000); fixed(d, hit.point); }
+      if (d.hp <= 0) { bubble('☁️ Stuffed with cloud cotton, so fluffy and soft!', 2000); fixed(d, hit.point); }
       return true;
     }
   }
@@ -1624,7 +1628,7 @@ function wrongToolHint(x, y) {
   if (need && need !== game.tool) {
     const el = document.querySelector(`#tools .tool[data-t="${need}"]`);
     if (el) { el.classList.remove('wiggle'); void el.offsetWidth; el.classList.add('wiggle'); }
-    bubble(`嗯，试试 ${TOOL[need].icon} ${TOOL[need].name} 好吗？`, 2000); tone(330, 300, .15, .03);
+    bubble(`Hmm, how about the ${TOOL[need].icon} ${TOOL[need].name}?`, 2000); tone(330, 300, .15, .03);
     return true;
   }
   return false;
@@ -1806,9 +1810,9 @@ function goToShelf() {
 function showCard(after, meta) {
   const v = $('endVeil');
   const before = game.before || after;
-  v.innerHTML = `<div class="card glass"><h2>${meta.name} 修好啦！✨</h2><p>${thanksOf(meta)}</p>
-    <div class="ba"><figure>${before ? `<img src="${before}" alt="修理前">` : ''}<figcaption>修理前</figcaption></figure><figure>${after ? `<img src="${after}" alt="修理后">` : ''}<figcaption>修理后 · 魂门星光偶像卡</figcaption></figure></div>
-    <div class="btnrow"><button type="button" class="cta small" id="nextBtn">🎤 再帮一位舞台伙伴</button><button type="button" class="ghost" id="saveBtn">📸 保存偶像照片卡</button></div></div>`;
+  v.innerHTML = `<div class="card glass"><h2>${meta.name} is all fixed! ✨</h2><p>${thanksOf(meta)}</p>
+    <div class="ba"><figure>${before ? `<img src="${before}" alt="Before">` : ''}<figcaption>Before</figcaption></figure><figure>${after ? `<img src="${after}" alt="After">` : ''}<figcaption>After · Honmoon Star Idol Card</figcaption></figure></div>
+    <div class="btnrow"><button type="button" class="cta small" id="nextBtn">🎤 Help Another Stage Friend</button><button type="button" class="ghost" id="saveBtn">📸 Save Idol Photo Card</button></div></div>`;
   v.classList.remove('hidden');
   $('nextBtn').onclick = () => { v.classList.add('hidden'); goHome(); };
   $('saveBtn').onclick = () => { if (!after) return; const a = document.createElement('a'); a.download = `${meta.enName || meta.id}-repaired.jpg`; a.href = after; a.click(); };
@@ -1910,7 +1914,7 @@ function camTargets(mode) {
   return { pos: v3(.9, y0 + h * .95, Math.max(3.9, h * 3.0)), look: v3(-.15, y0 + h * .5, -.3) };
 }
 
-/* ---------- Dual Form toggle (✨ 舞台金光形态 ↔ 🔮 猎魔/冥界觉醒形态) ---------- */
+/* ---------- Dual Form toggle (✨ Stage Idol Form ↔ 🔮 Awakened Form) ---------- */
 const normForm = (m) => { const r = String(m || 'stage').toLowerCase(); return r === 'awakened' || r === 'demon' || r === 'spirit' || r === 'saja' || r === 'underworld' ? 'awakened' : 'stage'; };
 function renderFormBtn() {
   const awakened = game.form === 'awakened';
@@ -1918,7 +1922,7 @@ function renderFormBtn() {
   if (wrap) wrap.classList.toggle('awakened', awakened);
   if (btn) { btn.classList.toggle('awakened', awakened); btn.setAttribute('aria-pressed', awakened ? 'true' : 'false'); btn.dataset.form = game.form; }
   if ($('formIcon')) $('formIcon').textContent = awakened ? '🔮' : '✨';
-  if ($('formLabel')) $('formLabel').textContent = awakened ? '猎魔/冥界觉醒形态' : '舞台金光形态';
+  if ($('formLabel')) $('formLabel').textContent = awakened ? 'Awakened Form' : 'Stage Idol Form';
 }
 function setForm(mode, opts = {}) {
   const norm = normForm(mode);
@@ -1935,7 +1939,7 @@ function setForm(mode, opts = {}) {
       spawn(TEX.glow, c.clone(), { life: .8, size: 1.2, grow: 1.6, opacity: .7, add: true, color: norm === 'awakened' ? '#7c3aed' : '#ffb84a' });
     }
     if (norm === 'awakened') { chime([392, 311, 466, 622], .09, .05); } else { chime([523, 659, 784, 1047], .09, .045); }
-    bubble((norm === 'awakened' ? '🔮 ' : '✨ ') + lineFor(norm === 'awakened' ? 'form-awakened' : 'form-stage', norm === 'awakened' ? '猎魔与冥界觉醒形态开启！' : '切换回舞台金光形态！'), 3000);
+    bubble((norm === 'awakened' ? '🔮 ' : '✨ ') + lineFor(norm === 'awakened' ? 'form-awakened' : 'form-stage', norm === 'awakened' ? 'Awakened Form, go! Shine bright, power of the Honmoon!' : 'Back to Stage Idol Form! The star idol is here!'), 3000);
     say(norm === 'awakened' ? 'form-awakened' : 'form-stage');
   }
   return norm;
@@ -1991,7 +1995,7 @@ $('rotL').onclick = () => { game.spinTo = (game.spinTo ?? turntable.rotation.y) 
 $('rotR').onclick = () => { game.spinTo = (game.spinTo ?? turntable.rotation.y) + Math.PI / 3; tone(500, 600, .1, .03); };
 $('zoomBtn').onclick = () => setCam(camMode === 'near' ? 'far' : 'near');
 $('fartBtn').onclick = () => triggerFart();
-$('voicePreviewBtn').onclick = () => { audio(); say('preview'); bubble('🎀 ' + lineFor('preview', '你好呀！欢迎来到猎魔女团与呆萌蓝虎修复工坊！'), 4200); };
+$('voicePreviewBtn').onclick = () => { audio(); say('preview'); bubble('🎀 ' + lineFor('preview', 'Hi there! Welcome to the KPop Demon Hunters Repair Workshop! Pick a stage friend and help them shine like gold again!'), 4200); };
 $('startBtn').onclick = () => { music.started = true; startVisit(); };
 $('stopBtn').onclick = goHome;
 $('pauseBtn').onclick = () => setPaused(!game.paused);

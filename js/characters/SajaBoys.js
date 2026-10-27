@@ -1,10 +1,10 @@
-// SajaBoys.js — High-Resolution 3D Character Builders for the 5 Saja Boys (狮男团)
+// SajaBoys.js — High-Resolution 3D Character Builders for the 5 Saja Boys
 // Characters:
-// 1. jinu    — 振宇 · 狮男团队长 (Black woven Gat hat + 28-bead gatkkeun + layered jeogori/trench coat + silver rings + 4-stringed Bipa lute)
-// 2. abby    — 艾比 · 力量主舞 (Two-tone spiky hair + sculpted chest/abs/bicep anatomy + cross-strap vest + fingerless gloves + Lion-Crest Chain Mic)
-// 3. mystery — 迷斯 · 银发神秘主唱 (26 silver-violet eye-swept bangs + high-collar embroidered silk coat + Glowing Spirit Stand Mic)
-// 4. romance — 罗曼 · 玫瑰花美男 (24 wavy rose-pink parted hair locks + velvet lapel suit + 18-petal 3D Rose Brooch & Heart Charm + Rose-Gold Vine Mic)
-// 5. baby    — 贝比 · 潮流说唱忙内 (Knitted cat-ear beanie + plush oversized pastel hoodie + chunky high-top sneakers + Sparkling Soda Pop Can & bubbles)
+// 1. jinu    — Jinu · Saja Boys Leader (Black woven Gat hat + 28-bead gatkkeun + layered jeogori/trench coat + silver rings + 4-stringed Bipa lute)
+// 2. abby    — Abby · Power Dancer (Two-tone spiky hair + sculpted chest/abs/bicep anatomy + cross-strap vest + fingerless gloves + Lion-Crest Chain Mic)
+// 3. mystery — Mystery · Silver-Haired Vocalist (26 silver-violet eye-swept bangs + high-collar embroidered silk coat + Glowing Spirit Stand Mic)
+// 4. romance — Romance · Rose Prince (24 wavy rose-pink parted hair locks + velvet lapel suit + 18-petal 3D Rose Brooch & Heart Charm + Rose-Gold Vine Mic)
+// 5. baby    — Baby · Street Maknae (Knitted cat-ear beanie + plush oversized pastel hoodie + chunky high-top sneakers + Sparkling Soda Pop Can & bubbles)
 
 import * as MAT from './materials.js';
 
@@ -158,7 +158,7 @@ function createSodaPopLabelTexture() {
   ctx.fillText('★ SODA POP ★', 256, 115);
   ctx.fillStyle = '#fff36b';
   ctx.font = 'bold 34px sans-serif';
-  ctx.fillText('苏打汽水 · SAJA', 256, 175);
+  ctx.fillText('FIZZY · SAJA BOYS', 256, 175);
 
   const tex = new THREE.CanvasTexture(c);
   if (THREE.SRGBColorSpace) tex.colorSpace = THREE.SRGBColorSpace; // label art is authored in sRGB
@@ -294,7 +294,7 @@ function buildMaleIdolHead(opts = {}) {
     head.add(blush);
   });
 
-  // Sculpted human ears + crystal stage In-Ear Monitors (耳返)
+  // Sculpted human ears + crystal stage In-Ear Monitors
   const earMonMat = getStdMat(earMonitorHex, {
     emissive: new THREE.Color(earMonitorHex),
     emissiveIntensity: 0.42,
@@ -533,7 +533,7 @@ function buildSajaHand(side, skinMat, opts = {}) {
 
 /**
  * Builds the front-facing Cracked Demon-Mark / Golden Honmoon Seal target (`parts.demonMarkSeal`)
- * for the `demon_mark` (`🔮 猎魔印记裂纹`) repair.
+ * for the `demon_mark` (`🔮 Cracked Demon Mark`) repair.
  */
 function buildDemonMarkSeal(stageColorHex = '#ffd45e', crackColorHex = '#b53cff') {
   const seal = new THREE.Group();
@@ -708,13 +708,13 @@ function attachSajaDualForm(root, { stageNodes = [], awakenedNodes = [], morphSp
 }
 
 // ============================================================================
-// 1. JINU (振宇 · 狮男团队长) — Gat Hat + 28-Bead Gatkkeun + Jeogori/Trench Coat + 4-String Bipa
+// 1. JINU (Jinu · Saja Boys Leader) — Gat Hat + 28-Bead Gatkkeun + Jeogori/Trench Coat + 4-String Bipa
 // ============================================================================
 export function buildJinu() {
   const root = new THREE.Group();
   root.name = 'jinu';
   root.characterId = 'jinu';
-  root.displayName = '振宇 · 狮男团队长';
+  root.displayName = 'Jinu · Saja Boys Leader';
   root.group = root;
   root.userData.baseScale = 1.04;
 
@@ -767,7 +767,7 @@ export function buildJinu() {
   markNoDecal(hairGroup);
   head.add(hairGroup);
 
-  // Finely Woven Translucent Black Korean Gat (黑笠) with 28-Bead Gatkkeun Chin Strap (`parts.leftEar`)
+  // Finely Woven Translucent Black Korean Gat with 28-Bead Gatkkeun Chin Strap (`parts.leftEar`)
   const gatGroup = new THREE.Group();
   gatGroup.name = 'leftEar';
   gatGroup.position.set(0, 0.32, 0.01);
@@ -1056,7 +1056,7 @@ export function buildJinu() {
     parts[leg.name] = leg;
   });
 
-  // Signature Prop (`parts.signatureProp`): 4-Stringed Bipa (四弦琵琶) Lute
+  // Signature Prop (`parts.signatureProp`): 4-Stringed Bipa Lute
   const bipaGroup = new THREE.Group();
   bipaGroup.name = 'signatureProp';
   bipaGroup.position.set(-0.24, -0.05, 0.29);
@@ -1136,13 +1136,13 @@ export function buildJinu() {
 }
 
 // ============================================================================
-// 2. ABBY (艾比 · 力量主舞) — Two-Tone Spiky Hair + Sculpted Muscle Anatomy + Cross-Strap Vest + Fingerless Gloves
+// 2. ABBY (Abby · Power Dancer) — Two-Tone Spiky Hair + Sculpted Muscle Anatomy + Cross-Strap Vest + Fingerless Gloves
 // ============================================================================
 export function buildAbby() {
   const root = new THREE.Group();
   root.name = 'abby';
   root.characterId = 'abby';
-  root.displayName = '艾比 · 力量主舞';
+  root.displayName = 'Abby · Power Dancer';
   root.group = root;
   root.userData.baseScale = 1.07;
 
@@ -1335,7 +1335,7 @@ export function buildAbby() {
     torso.add(vestPanel);
   });
 
-  // Metallic Cross-Straps (`金属交叉胸带`, metalness <= 0.22)
+  // Metallic Cross-Straps (metalness <= 0.22)
   [-1, 1].forEach((dir) => {
     const crossStrap = makeTaperedTube(
       [
@@ -1506,13 +1506,13 @@ export function buildAbby() {
 }
 
 // ============================================================================
-// 3. MYSTERY (迷斯 · 银发神秘主唱) — 26 Silver-Violet Bangs + High-Collar Embroidered Silk Coat + Glowing Spirit Stand Mic
+// 3. MYSTERY (Mystery · Silver-Haired Vocalist) — 26 Silver-Violet Bangs + High-Collar Embroidered Silk Coat + Glowing Spirit Stand Mic
 // ============================================================================
 export function buildMystery() {
   const root = new THREE.Group();
   root.name = 'mystery';
   root.characterId = 'mystery';
-  root.displayName = '迷斯 · 银发神秘主唱';
+  root.displayName = 'Mystery · Silver-Haired Vocalist';
   root.group = root;
   root.userData.baseScale = 1.03;
 
@@ -1728,7 +1728,7 @@ export function buildMystery() {
     parts[leg.name] = leg;
   });
 
-  // Signature Prop (`parts.signatureProp`): Glowing Spirit Stand Microphone (幽光灵体立麦)
+  // Signature Prop (`parts.signatureProp`): Glowing Spirit Stand Microphone
   const standMic = new THREE.Group();
   standMic.name = 'signatureProp';
   standMic.position.set(-0.26, -0.12, 0.31);
@@ -1788,13 +1788,13 @@ export function buildMystery() {
 }
 
 // ============================================================================
-// 4. ROMANCE (罗曼 · 玫瑰花美男) — 24 Wavy Rose-Pink Hair Locks + Velvet Suit + 3D Rose Brooch & Heart Charm + Rose-Gold Vine Mic
+// 4. ROMANCE (Romance · Rose Prince) — 24 Wavy Rose-Pink Hair Locks + Velvet Suit + 3D Rose Brooch & Heart Charm + Rose-Gold Vine Mic
 // ============================================================================
 export function buildRomance() {
   const root = new THREE.Group();
   root.name = 'romance';
   root.characterId = 'romance';
-  root.displayName = '罗曼 · 玫瑰花美男';
+  root.displayName = 'Romance · Rose Prince';
   root.group = root;
   root.userData.baseScale = 1.03;
 
@@ -2078,13 +2078,13 @@ export function buildRomance() {
 }
 
 // ============================================================================
-// 5. BABY (贝比 · 潮流说唱忙内) — Knitted Cat-Ear Beanie + Oversized Pastel Hoodie + Chunky High-Tops + Soda Pop Can
+// 5. BABY (Baby · Street Maknae) — Knitted Cat-Ear Beanie + Oversized Pastel Hoodie + Chunky High-Tops + Soda Pop Can
 // ============================================================================
 export function buildBaby() {
   const root = new THREE.Group();
   root.name = 'baby';
   root.characterId = 'baby';
-  root.displayName = '贝比 · 潮流说唱忙内';
+  root.displayName = 'Baby · Street Maknae';
   root.group = root;
   root.userData.baseScale = 0.96;
 
@@ -2336,7 +2336,7 @@ export function buildBaby() {
     parts[leg.name] = leg;
   });
 
-  // Signature Prop (`parts.signatureProp`): Sparkling "Soda Pop" Can (`闪亮苏打汽水罐`) + Rising 3D Fizzy Bubbles
+  // Signature Prop (`parts.signatureProp`): Sparkling "Soda Pop" Can + Rising 3D Fizzy Bubbles
   const sodaGroup = new THREE.Group();
   sodaGroup.name = 'signatureProp';
   sodaGroup.position.set(-0.3, -0.02, 0.33);
@@ -2415,10 +2415,10 @@ export function buildBaby() {
 export const SAJA_BOYS_META = {
   jinu: {
     id: 'jinu',
-    name: '振宇 · 狮男团队长',
-    shortName: '振宇 Jinu',
-    title: 'Saja Boys 狮男团队长 · 黑笠琵琶冥使',
-    who: '黑笠琵琶队长',
+    name: 'Jinu · Saja Boys Leader',
+    shortName: 'Jinu',
+    title: 'Saja Boys Leader · Gat Hat & Bipa Lute',
+    who: 'Gat Hat & Bipa Leader',
     category: 'saja_boys',
     group: 'saja_boys',
     icon: '🎩',
@@ -2427,16 +2427,16 @@ export const SAJA_BOYS_META = {
     earSide: 'leftEar',
     pendantKey: 'signatureProp',
     pelvis: { y: -0.39, z: 0.01, rx: 0.25, ry: 0.16, rz: 0.22, frontY: -0.36, frontZ: 0.24 },
-    hello: '你好！我是 Saja Boys 队长振宇，快帮我把黑笠帽、演出服和四弦琵琶整理闪亮吧！',
-    thanks: '太帅啦！黑笠和四弦琵琶重现冥界金光，听我为你弹奏一曲！',
+    hello: 'Hello, I\'m Jinu, leader of the Saja Boys. The night wind of the underworld got dust all over my Gat hat and my Bipa lute. Can you help me?',
+    thanks: 'My Gat sits straight and my Bipa sings sweetly again! Thank you. Let me play you a starlight melody.',
     build: buildJinu,
   },
   abby: {
     id: 'abby',
-    name: '艾比 · 力量主舞',
-    shortName: '艾比 Abby',
-    title: 'Saja Boys 力量主舞 · 狂野肌肉舞担',
-    who: '狂野力量主舞',
+    name: 'Abby · Power Dancer',
+    shortName: 'Abby',
+    title: 'Saja Boys Power Dancer · Wild Muscle Moves',
+    who: 'Wild Power Dancer',
     category: 'saja_boys',
     group: 'saja_boys',
     icon: '🦁',
@@ -2445,16 +2445,16 @@ export const SAJA_BOYS_META = {
     earSide: 'leftEar',
     pendantKey: 'signatureProp',
     pelvis: { y: -0.39, z: 0.01, rx: 0.26, ry: 0.16, rz: 0.22, frontY: -0.36, frontZ: 0.23 },
-    hello: '嗨！我是 Saja Boys 力量主舞艾比，高难度街舞把我的刺猬头和狮王徽章弄乱啦！',
-    thanks: '充满力量！双色刺猬头和狮王金链又闪闪发光啦，看我来一段空翻热舞！',
+    hello: 'Hey! I\'m Abby, the power dancer. I scuffed my wristbands doing a big street-dance move, and my stage vest got muddy. Can you clean me up?',
+    thanks: 'I\'m full of power, and my stage armor is shining! You\'re the best backstage buddy!',
     build: buildAbby,
   },
   mystery: {
     id: 'mystery',
-    name: '迷斯 · 银发神秘主唱',
-    shortName: '迷斯 Mystery',
-    title: 'Saja Boys 神秘主唱 · 银紫遮眼魅影',
-    who: '银发神秘主唱',
+    name: 'Mystery · Silver-Haired Vocalist',
+    shortName: 'Mystery',
+    title: 'Saja Boys Mystery Vocalist · Silver-Violet Bangs',
+    who: 'Silver-Haired Mystery Vocalist',
     category: 'saja_boys',
     group: 'saja_boys',
     icon: '🎙️',
@@ -2463,16 +2463,16 @@ export const SAJA_BOYS_META = {
     earSide: 'leftEar',
     pendantKey: 'signatureProp',
     pelvis: { y: -0.39, z: 0.01, rx: 0.25, ry: 0.16, rz: 0.22, frontY: -0.36, frontZ: 0.23 },
-    hello: '嘘……我是神秘主唱迷斯，银紫色刘海和幽光立麦沾上了暗影灰尘，帮我清理一下吧。',
-    thanks: '真动听……幽光立麦和刺绣礼服焕然一新，让我的歌声伴你闪耀舞台！',
+    hello: 'Shh... I\'m Mystery, the mysterious vocalist. My silver bangs and my glowing stand mic have gone a bit dim. Can you light me up again?',
+    thanks: 'My glowing mic shines once more. My song will guard your sweet dreams!',
     build: buildMystery,
   },
   romance: {
     id: 'romance',
-    name: '罗曼 · 玫瑰花美男',
-    shortName: '罗曼 Romance',
-    title: 'Saja Boys 玫瑰视觉 · 丝绒浪漫贵公子',
-    who: '玫瑰丝绒贵公子',
+    name: 'Romance · Rose Prince',
+    shortName: 'Romance',
+    title: 'Saja Boys Rose Visual · Velvet Romantic Prince',
+    who: 'Velvet Rose Prince',
     category: 'saja_boys',
     group: 'saja_boys',
     icon: '🌹',
@@ -2481,16 +2481,16 @@ export const SAJA_BOYS_META = {
     earSide: 'leftEar',
     pendantKey: 'signatureProp',
     pelvis: { y: -0.39, z: 0.01, rx: 0.25, ry: 0.16, rz: 0.22, frontY: -0.36, frontZ: 0.23 },
-    hello: '嗨，小可爱！我是玫瑰贵公子罗曼，帮我把波浪粉发、立体玫瑰胸针和玫瑰金麦修好吧！',
-    thanks: '太浪漫啦！丝绒西装和玫瑰胸针闪着粉金光芒，送你一朵盛开的红玫瑰！',
+    hello: 'Hi, sweetie. I\'m Romance, the Rose Prince. My velvet suit and my rose-gold mic got dirty. Will you make me handsome again?',
+    thanks: 'The red rose on my chest is blooming again! This prettiest rose is for the kindest helper, you!',
     build: buildRomance,
   },
   baby: {
     id: 'baby',
-    name: '贝比 · 潮流说唱忙内',
-    shortName: '贝比 Baby',
-    title: 'Saja Boys 说唱忙内 · 猫耳帽苏打少年',
-    who: '猫耳帽苏打忙内',
+    name: 'Baby · Street Maknae',
+    shortName: 'Baby',
+    title: 'Saja Boys Rap Maknae · Cat-Ear Beanie Soda Kid',
+    who: 'Cat-Ear Beanie Soda Maknae',
     category: 'saja_boys',
     group: 'saja_boys',
     icon: '🥤',
@@ -2499,8 +2499,8 @@ export const SAJA_BOYS_META = {
     earSide: 'leftEar',
     pendantKey: 'signatureProp',
     pelvis: { y: -0.37, z: 0.02, rx: 0.27, ry: 0.17, rz: 0.26, frontY: -0.34, frontZ: 0.3 },
-    hello: '耶！我是说唱忙内贝比，跳得太嗨把猫耳冷帽、宽松卫衣和苏打汽水罐弄脏啦！',
-    thanks: '咕噜咕噜噗！猫耳帽和闪亮苏打汽水罐满血复活，我们一起快乐冒泡吧！',
+    hello: 'Hey there! I\'m Baby, the maknae. I spilled Soda Pop all over my cat-ear beanie and my hoodie. Please wash them for me!',
+    thanks: 'Glug glug! The Soda Pop is fizzing, and my cat-ear beanie is fluffy again. Have some sweet soda!',
     build: buildBaby,
   },
 };

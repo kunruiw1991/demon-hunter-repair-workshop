@@ -45,13 +45,13 @@ function ensureBoundingSpheres(rootGroup) {
 }
 
 /* ============================================================================
- * 1. RUMI (鲁米 · 猎魔主唱) — Half-Demon Lead Vocalist with 28-Segment Dragon Braid & Saingeom
+ * 1. RUMI (Rumi · Lead Vocal) — Half-Demon Lead Vocalist with 28-Segment Dragon Braid & Saingeom
  * ============================================================================ */
 export function buildRumi() {
   const root = new THREE.Group();
   root.name = 'rumi';
   root.characterId = 'rumi';
-  root.displayName = '鲁米 · 猎魔主唱';
+  root.displayName = 'Rumi · Lead Vocal';
   root.group = root;
   root.userData.form = 'stage';
   root.userData.baseScale = 1.0;
@@ -411,7 +411,7 @@ export function buildRumi() {
   const rightArm = buildIdolArm(1, 'rightArm');
   root.add(leftArm, rightArm);
 
-  // 6. Signature Weapon (`parts.signatureProp`): Saingeom (四寅剑 — Four-Tiger Demon-Slaying Sword)
+  // 6. Signature Weapon (`parts.signatureProp`): Saingeom (Four-Tiger Demon-Slaying Sword)
   const signatureProp = new THREE.Group();
   signatureProp.name = 'signatureProp';
   signatureProp.position.set(0.18, -0.46, 0.24);
@@ -435,7 +435,7 @@ export function buildRumi() {
   grip.position.set(0, -0.06, 0);
   signatureProp.add(grip);
 
-  // Four-Tiger Crossguard (四寅剑格)
+  // Four-Tiger Crossguard
   const guard = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.032, 0.048, 4, 2, 2), goldMat);
   guard.position.set(0, 0.02, 0);
   signatureProp.add(guard);
@@ -603,13 +603,13 @@ export function buildRumi() {
 }
 
 /* ============================================================================
- * 2. MIRA (米拉 · 刀群舞主舞) — Main Dancer with 22 Hot-Pink Hair Strands & Gokdo Polearm
+ * 2. MIRA (Mira · Main Dancer) — Main Dancer with 22 Hot-Pink Hair Strands & Gokdo Polearm
  * ============================================================================ */
 export function buildMira() {
   const root = new THREE.Group();
   root.name = 'mira';
   root.characterId = 'mira';
-  root.displayName = '米拉 · 刀群舞主舞';
+  root.displayName = 'Mira · Main Dancer';
   root.group = root;
   root.userData.form = 'stage';
   root.userData.baseScale = 1.06;
@@ -838,7 +838,7 @@ export function buildMira() {
   }
   torso.add(awakenedLotusRings);
 
-  // 3. Arms, Hands & Signature Weapon (`parts.signatureProp`): Gokdo (曲刀 Crescent Polearm)
+  // 3. Arms, Hands & Signature Weapon (`parts.signatureProp`): Gokdo (Crescent Polearm)
   const buildDancerArm = (s, name) => {
     const armG = new THREE.Group();
     armG.name = name;
@@ -886,7 +886,7 @@ export function buildMira() {
   const rightArm = buildDancerArm(1, 'rightArm');
   root.add(leftArm, rightArm);
 
-  // Gokdo (曲刀) Crescent Polearm attached to `rightArm`
+  // Gokdo Crescent Polearm attached to `rightArm`
   const signatureProp = new THREE.Group();
   signatureProp.name = 'signatureProp';
   signatureProp.position.set(0.18, -0.42, 0.24);
@@ -918,7 +918,7 @@ export function buildMira() {
   );
   signatureProp.add(lotusCollar);
 
-  // Sweeping Crescent Moon Blade (曲刀月刃)
+  // Sweeping Crescent Moon Blade
   const crescentBlade = taperedTube(
     [
       [0, 0.78, 0],
@@ -1056,13 +1056,13 @@ export function buildMira() {
 }
 
 /* ============================================================================
- * 3. ZOEY (佐伊 · 双丸子头忙内) — Maknae Rapper with Twin Braided Space-Buns & Twin Shin-kal
+ * 3. ZOEY (Zoey · Maknae Rapper) — Maknae Rapper with Twin Braided Space-Buns & Twin Shin-kal
  * ============================================================================ */
 export function buildZoey() {
   const root = new THREE.Group();
   root.name = 'zoey';
   root.characterId = 'zoey';
-  root.displayName = '佐伊 · 双丸子头忙内';
+  root.displayName = 'Zoey · Maknae Rapper';
   root.group = root;
   root.userData.form = 'stage';
   root.userData.baseScale = 0.97;
@@ -1153,7 +1153,7 @@ export function buildZoey() {
     head.add(bang);
   }
 
-  // 2. Iconic Twin Sculpted Braided Space-Buns (双丸子头) + Fluttering Ribbons on `leftEar` & `rightEar`
+  // 2. Iconic Twin Sculpted Braided Space-Buns + Fluttering Ribbons on `leftEar` & `rightEar`
   const tail = new THREE.Group();
   tail.name = 'tail';
   tail.position.set(0, 0.55, -0.10);
@@ -1276,7 +1276,7 @@ export function buildZoey() {
   }
   torso.add(spiritKnifeHalo);
 
-  // 4. Arms, Hands & Signature Prop (`parts.signatureProp`): Twin Shin-kal (神刀 Spirit Throwing Knives)
+  // 4. Arms, Hands & Signature Prop (`parts.signatureProp`): Twin Shin-kal (Spirit Throwing Knives)
   const buildRapperArm = (s, name) => {
     const armG = new THREE.Group();
     armG.name = name;
@@ -1322,7 +1322,7 @@ export function buildZoey() {
   const rightArm = buildRapperArm(1, 'rightArm');
   root.add(leftArm, rightArm);
 
-  // Twin Shin-kal (神刀) Spirit Throwing Knives with Shamanic Bells & 5-Element Tassels (`parts.signatureProp`)
+  // Twin Shin-kal Spirit Throwing Knives with Shamanic Bells & 5-Element Tassels (`parts.signatureProp`)
   const signatureProp = new THREE.Group();
   signatureProp.name = 'signatureProp';
   signatureProp.position.set(0.17, -0.45, 0.23);
@@ -1502,11 +1502,11 @@ export function buildZoey() {
 export const HUNTRX_GIRLS_META = {
   rumi: {
     id: 'rumi',
-    name: '鲁米 · 猎魔主唱',
-    shortName: '鲁米 Rumi',
+    name: 'Rumi · Lead Vocal',
+    shortName: 'Rumi',
     enName: 'Rumi',
-    title: 'HUNTR/X 猎魔主唱 · 半魔剑舞少女',
-    who: 'HUNTR/X 猎魔主唱 · 半魔剑舞少女',
+    title: 'HUNTR/X Lead Vocal · Half-Demon Sword Dancer',
+    who: 'HUNTR/X Lead Vocal · Half-Demon Sword Dancer',
     category: 'huntrx',
     group: 'huntrx',
     icon: '🗡️',
@@ -1516,17 +1516,17 @@ export const HUNTRX_GIRLS_META = {
     earSide: 'leftEar',
     pendantKey: 'signatureProp',
     pelvis: { y: -0.29, z: 0.0, rx: 0.23, ry: 0.15, rz: 0.22, frontY: -0.26, frontZ: 0.3 },
-    hello: '嗨！我是 HUNTR/X 主唱鲁米！刚才和冥界恶魔战斗时，我的紫龙长辫和四寅剑都弄脏啦，快帮我修复吧！',
-    thanks: '哇！紫龙长辫和四寅剑都闪耀着金色魂门光芒，谢谢你，我们一起站上舞台高歌吧！',
+    hello: 'Hi! I\'m Rumi, lead vocal of HUNTR/X! I just fought a shadow demon, and my purple dragon braid and my Saingeom sword got all messy. Can you fix me up?',
+    thanks: 'My Saingeom and my golden Honmoon mark are sparkling again! Thank you, little fixer. Come listen to me sing!',
     build: buildRumi,
   },
   mira: {
     id: 'mira',
-    name: '米拉 · 刀群舞主舞',
-    shortName: '米拉 Mira',
+    name: 'Mira · Main Dancer',
+    shortName: 'Mira',
     enName: 'Mira',
-    title: 'HUNTR/X 刀群舞主舞 · 绯红月刃女神',
-    who: 'HUNTR/X 刀群舞主舞 · 绯红月刃女神',
+    title: 'HUNTR/X Main Dancer · Crimson Moon-Blade Star',
+    who: 'HUNTR/X Main Dancer · Crimson Moon-Blade Star',
     category: 'huntrx',
     group: 'huntrx',
     icon: '🌙',
@@ -1536,17 +1536,17 @@ export const HUNTRX_GIRLS_META = {
     earSide: 'leftEar',
     pendantKey: 'signatureProp',
     pelvis: { y: -0.27, z: 0.0, rx: 0.23, ry: 0.15, rz: 0.22, frontY: -0.24, frontZ: 0.29 },
-    hello: '你好呀！我是主舞米拉，练刀群舞时把粉色长发、金腰链和绯红曲刀刮花啦，帮我护理一下吧！',
-    thanks: '太棒啦！绯红曲刀和舞台胸衣焕然一新，看我为你跳支最闪耀的刀群舞！',
+    hello: 'Hello! I\'m Mira, the main dancer. I practiced so hard that my crimson outfit and my Gokdo blade need a little care!',
+    thanks: 'My Gokdo shines like new, and my dance moves are full of power again! Here\'s the coolest stage kiss for you!',
     build: buildMira,
   },
   zoey: {
     id: 'zoey',
-    name: '佐伊 · 双丸子头忙内',
-    shortName: '佐伊 Zoey',
+    name: 'Zoey · Maknae Rapper',
+    shortName: 'Zoey',
     enName: 'Zoey',
-    title: 'HUNTR/X 说唱忙内 · 双丸子神刀少女',
-    who: 'HUNTR/X 说唱忙内 · 双丸子神刀少女',
+    title: 'HUNTR/X Maknae Rapper · Space-Bun Shin-kal Girl',
+    who: 'HUNTR/X Maknae Rapper · Space-Bun Shin-kal Girl',
     category: 'huntrx',
     group: 'huntrx',
     icon: '⚡',
@@ -1556,8 +1556,8 @@ export const HUNTRX_GIRLS_META = {
     earSide: 'leftEar',
     pendantKey: 'signatureProp',
     pelvis: { y: -0.29, z: 0.0, rx: 0.23, ry: 0.15, rz: 0.22, frontY: -0.26, frontZ: 0.3 },
-    hello: '耶！我是说唱忙内佐伊！双丸子头发带散了，神刀流苏也沾了泥巴，快帮我打理一下吧！',
-    thanks: '酷毙啦！双丸子头和双神刀叮当作响，看我给你来一段超燃说唱！',
+    hello: 'Yay! I\'m Zoey, the maknae rapper! I flipped too hard, and my space-bun ribbons and my Shin-kal knives came loose. Help me, please!',
+    thanks: 'Awesome! My space buns are fluffy and my Shin-kal are sparkling. Let\'s rock the whole stage together!',
     build: buildZoey,
   },
 };

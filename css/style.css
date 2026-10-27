@@ -628,11 +628,19 @@ button:focus-visible {
 }
 
 .tool span {
-  font-size: 11px;
+  font-size: 10px;
+  line-height: 1.15;
   font-weight: 800;
   color: #fff8eb;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  white-space: nowrap;
+  /* English tool names ("Gold-Thread Needle", "Golden Honmoon Balm") wrap to two centered lines
+     inside the 74px cell instead of overlapping their neighbours. */
+  white-space: normal;
+  text-align: center;
+  width: 100%;
+  max-width: 78px;
+  min-height: 2.3em;
+  overflow-wrap: anywhere;
 }
 
 .tool.sel .face {
@@ -932,7 +940,7 @@ button:focus-visible {
     gap: 6px;
   }
   /* Phones: icon-only brand pill so the Dual Form pill, star pill and sound buttons share one row
-     (the 12px title used to squeeze "舞台金光形态" into a 6-line vertical stack over the home card). */
+     (the 12px title used to squeeze "Stage Idol Form" into a 6-line vertical stack over the home card). */
   .brand {
     padding: 4px;
     gap: 0;

@@ -2,7 +2,7 @@
 """Automated gbrowser 3D Scene-Graph & Asset Audit for KPop Demon Hunters Repair Workshop 3D.
 
 Verifies:
-1. <html lang="zh-CN"> and zero console/page errors (window.__errs.length === 0).
+1. <html lang="en"> and zero console/page errors (window.__errs.length === 0).
 2. 4 Category Filter Tabs:
    - all -> 10 .patient cards
    - huntrx -> 3 .patient cards (rumi, mira, zoey)
@@ -15,7 +15,7 @@ Verifies:
 4. Dual Form Toggle (stage/idol <-> awakened):
    - Verifies scene-graph diff across all 10 characters + captures Idol vs Awakened screenshots in /tmp
 5. VOICE_CLIPS Offline Mandarin MP3 Audit:
-   - Verifies all bundled zh-CN-XiaoyiNeural MP3 clips decode cleanly with valid duration.
+   - Verifies all bundled en-US edge-tts MP3 clips decode cleanly with valid duration.
 
 Usage:
   python3 tests/audit_scene.py [port] [outdir]
@@ -432,8 +432,8 @@ def run_scene_audit(port=None, out_dir=None):
       failures.append(data["fatal"])
       return False, {"data": data, "failures": failures}
 
-    if data.get("lang") != "zh-CN":
-      failures.append(f"Expected <html lang='zh-CN'>, got {data.get('lang')!r}")
+    if data.get("lang") != "en":
+      failures.append(f"Expected <html lang='en'>, got {data.get('lang')!r}")
 
     if data.get("errs"):
       failures.append(f"Runtime console/page errors: {data['errs']}")

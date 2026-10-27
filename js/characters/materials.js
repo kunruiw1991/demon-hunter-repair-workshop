@@ -316,7 +316,7 @@ export function createPorcelainPeonyTexture(size = 256) {
   ctx.lineWidth = 2;
   ctx.strokeRect(10, 22, size - 20, size - 44);
 
-  // Cobalt Blue Peony & Cloud Scroll motifs (青花缠枝牡丹纹)
+  // Cobalt Blue Peony & Cloud Scroll motifs (blue-and-white interlocking peony motif)
   const centers = [
     [64, 128],
     [128, 118],
@@ -902,7 +902,7 @@ export function buildSculptedIdolHead(opts = {}) {
     pinna.userData.noDecal = true;
     earG.add(pinna);
 
-    // Crystal In-Ear Monitor (舞台闪亮耳返)
+    // Crystal In-Ear Monitor (sparkly stage in-ear monitor)
     const iemBody = new THREE.Mesh(new THREE.OctahedronGeometry(radius * 0.075, 1), iemShellMat);
     iemBody.scale.set(0.75, 1.1, 0.95);
     iemBody.position.set(s * 0.018, -0.005, 0.025);
@@ -1147,7 +1147,7 @@ export function buildPleatedSkirt(
 
 /**
  * Builds the front-facing Demon-Mark / Honmoon Crest group (`parts.demonMarkSeal`)
- * targeted by the `demon_mark` (`🔮 猎魔印记裂纹`) -> `honmoon_balm` (`✨ 魂门金印膏`) repair.
+ * targeted by the `demon_mark` (`🔮 Cracked Demon Mark`) -> `honmoon_balm` (`✨ Golden Honmoon Balm`) repair.
  */
 export function buildDemonMarkSealGroup(stageGoldHex = '#fbbf24', crackHex = '#d946ef', opts = {}) {
   const seal = new THREE.Group();

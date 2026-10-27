@@ -1,10 +1,10 @@
-// MinhwaCompanions.js — High-Resolution 3D Character Builders for Korean Minhwa Companions (民画福虎与六眼喜鹊)
+// MinhwaCompanions.js — High-Resolution 3D Character Builders for Korean Minhwa Companions (Derpy Tiger & Sussie)
 // Characters:
-// 1. derpy_tiger   — 呆萌蓝虎 · 民画福虎 (Chubby Korean Minhwa blue tiger with 36+ cerulean/indigo tufted fur clusters,
-//                    28 black folk-art stripe reliefs including 王 forehead mark, huge golden saucer eyes, goofy grin
+// 1. derpy_tiger   — Derpy · Blue Minhwa Tiger (Chubby Korean Minhwa blue tiger with 36+ cerulean/indigo tufted fur clusters,
+//                    28 black folk-art stripe reliefs including the Chinese 'king' forehead mark, huge golden saucer eyes, goofy grin
 //                    with 12 white fangs & curled pink tongue, plump paws with pink toe beans, ringed tail, and
 //                    Tipped-to-Upright Blue-and-White Porcelain Peony Flowerpot `parts.signatureProp` & `parts.flowerpot`)
-// 2. sussie_magpie — 苏西 · 六眼小喜鹊 (Korean folk magpie with 32+ layered flight feathers & 14 tail feathers,
+// 2. sussie_magpie — Sussie · Six-Eyed Magpie (Korean folk magpie with 32+ layered flight feathers & 14 tail feathers,
 //                    6 glowing golden eyes — 3 inside `leftEye` and 3 inside `rightEye`, sculpted beak & 4-toed talons,
 //                    miniature black Gat hat `parts.leftEar`, and Golden Honmoon Bell & Plum Blossom Branch `parts.signatureProp`)
 
@@ -177,13 +177,13 @@ function attachMinhwaDualForm(root, { stageNodes = [], awakenedNodes = [], morph
 }
 
 // ============================================================================
-// 1. DERPY TIGER (呆萌蓝虎 · 民画福虎)
+// 1. DERPY TIGER (Derpy · Blue Minhwa Tiger)
 // ============================================================================
 export function buildDerpyTiger() {
   const root = new THREE.Group();
   root.name = 'derpy_tiger';
   root.characterId = 'derpy_tiger';
-  root.displayName = '呆萌蓝虎 · 民画福虎';
+  root.displayName = 'Derpy · Blue Minhwa Tiger';
   root.group = root;
   root.userData.baseScale = 1.02;
 
@@ -288,7 +288,7 @@ export function buildDerpyTiger() {
     parts[ear.name] = ear;
   });
 
-  // Huge Golden Saucer Eyes (`黄金大圆眼`) with Concentric Folk-Art Rings
+  // Huge Golden Saucer Eyes with Concentric Folk-Art Rings
   const eyes = new THREE.Group();
   eyes.name = 'eyes';
   eyes.position.set(0, 0.12, 0.37);
@@ -384,7 +384,7 @@ export function buildDerpyTiger() {
     grinGroup.add(fang);
   }
 
-  // Curled Pink Tongue (`卷曲粉舌头`)
+  // Curled Pink Tongue
   const tongue = makeTaperedTube(
     [
       [0, -0.04, 0.02],
@@ -401,7 +401,7 @@ export function buildDerpyTiger() {
   markNoDecal(grinGroup);
   head.add(grinGroup);
 
-  // Forehead `王` (King) Mark + Facial Stripe Reliefs (part of 28 total 3D stripe reliefs)
+  // Forehead 'King' Mark + Facial Stripe Reliefs (part of 28 total 3D stripe reliefs)
   const wangGroup = new THREE.Group();
   wangGroup.name = 'wangForeheadMark';
   const wangStrokes = [
@@ -471,7 +471,7 @@ export function buildDerpyTiger() {
 
   // 36+ Sculpted Cerulean/Indigo/Cream Tufted Fur Clusters around cheeks, chest ruff, shoulders, and haunches.
   // Tufts flow DOWN along the body like fur locks (not radial spikes), and the cream belly stays clean
-  // so the blue tufts can never be mistaken for the "暗影刺球" thorn-burr damage.
+  // so the blue tufts can never be mistaken for the "Shadow Burrs" thorn-burr damage.
   const furTuftGroup = new THREE.Group();
   furTuftGroup.name = 'minhwaTuftedFurClusters';
   for (let i = 0; i < 38; i++) {
@@ -694,7 +694,7 @@ export function buildDerpyTiger() {
 
   // ==========================================================================
   // SIGNATURE PROP (`parts.signatureProp` & `parts.flowerpot`):
-  // Blue-and-White Porcelain Peony Flowerpot (`青花瓷牡丹花盆`) with `onPolishProgress(k)`
+  // Blue-and-White Porcelain Peony Flowerpot with `onPolishProgress(k)`
   // ==========================================================================
   const flowerpotAnchor = new THREE.Group();
   flowerpotAnchor.name = 'signatureProp';
@@ -912,13 +912,13 @@ export function buildDerpyTiger() {
 }
 
 // ============================================================================
-// 2. SUSSIE MAGPIE (苏西 · 六眼小喜鹊)
+// 2. SUSSIE MAGPIE (Sussie · Six-Eyed Magpie)
 // ============================================================================
 export function buildSussieMagpie() {
   const root = new THREE.Group();
   root.name = 'sussie_magpie';
   root.characterId = 'sussie_magpie';
-  root.displayName = '苏西 · 六眼小喜鹊';
+  root.displayName = 'Sussie · Six-Eyed Magpie';
   root.group = root;
   root.userData.baseScale = 1.0;
 
@@ -996,7 +996,7 @@ export function buildSussieMagpie() {
   headMesh.receiveShadow = true;
   head.add(headMesh);
 
-  // Sculpted Curved Beak (`精致弯喙`) with upper/lower mandibles
+  // Sculpted Curved Beak with upper/lower mandibles
   const beakGroup = new THREE.Group();
   beakGroup.name = 'magpieBeak';
   beakGroup.position.set(0, -0.02, 0.37);
@@ -1028,7 +1028,7 @@ export function buildSussieMagpie() {
   head.add(beakGroup);
 
   // ==========================================================================
-  // SIX GLOWING GOLDEN EYES (`六只黄金灵眼`: 3 stacked golden eyes in `leftEye` + 3 in `rightEye`)
+  // SIX GLOWING GOLDEN EYES (3 stacked golden eyes in `leftEye` + 3 in `rightEye`)
   // ==========================================================================
   const eyes = new THREE.Group();
   eyes.name = 'eyes';
@@ -1080,7 +1080,7 @@ export function buildSussieMagpie() {
     eyes.add(sideEyeGroup);
   });
 
-  // Miniature Black Korean Gat Hat (`小黑笠`, `parts.leftEar`) with Red Coral Bead Strap
+  // Miniature Black Korean Gat Hat (`parts.leftEar`) with Red Coral Bead Strap
   const miniGat = new THREE.Group();
   miniGat.name = 'leftEar';
   miniGat.position.set(0, 0.36, -0.02);
@@ -1323,7 +1323,7 @@ export function buildSussieMagpie() {
   root.add(tail);
   parts.tail = tail;
 
-  // Signature Prop (`parts.signatureProp`): Golden Honmoon Bell & Talismanic Plum Blossom Branch (`魂门金铃与梅花枝`)
+  // Signature Prop (`parts.signatureProp`): Golden Honmoon Bell & Talismanic Plum Blossom Branch
   const propGroup = new THREE.Group();
   propGroup.name = 'signatureProp';
   propGroup.position.set(0, -0.18, 0.38);
@@ -1415,10 +1415,10 @@ export function buildSussieMagpie() {
 export const MINHWA_COMPANIONS_META = {
   derpy_tiger: {
     id: 'derpy_tiger',
-    name: '呆萌蓝虎 · 民画福虎',
-    shortName: '呆萌蓝虎 Derpy',
-    title: '朝鲜民画福虎 · 呆萌青花瓷守护兽',
-    who: '民画呆萌蓝虎',
+    name: 'Derpy · Blue Minhwa Tiger',
+    shortName: 'Derpy',
+    title: 'Korean Minhwa Lucky Tiger · Porcelain Flowerpot Guardian',
+    who: 'Blue Minhwa Tiger',
     category: 'minhwa',
     group: 'minhwa',
     icon: '🐯',
@@ -1427,16 +1427,16 @@ export const MINHWA_COMPANIONS_META = {
     earSide: 'leftEar',
     pendantKey: 'signatureProp',
     pelvis: { y: -0.44, z: 0.04, rx: 0.38, ry: 0.22, rz: 0.36, frontY: -0.4, frontZ: 0.4 },
-    hello: '嗷呜~ 我是民画呆萌蓝虎 Derpy！我不小心把青花瓷牡丹花盆撞翻啦，绒毛也脏兮兮的，快帮帮我吧！',
-    thanks: '呼噜噜~ 青花瓷牡丹花盆重新立起来开花啦，黄金大圆眼和蓝虎毛闪闪发亮，给你舔舔手！',
+    hello: 'Rawr! I\'m Derpy, the blue Minhwa tiger. I was chasing a butterfly and knocked over my porcelain peony flowerpot. Help me stand it up!',
+    thanks: 'Rawr-ha-ha! The flowerpot is standing tall, and the peonies smell so sweet. Derpy gives you a happy paw pat!',
     build: buildDerpyTiger,
   },
   sussie_magpie: {
     id: 'sussie_magpie',
-    name: '苏西 · 六眼小喜鹊',
-    shortName: '六眼喜鹊 Sussie',
-    title: '朝鲜民画六眼灵鹊 · 小黑笠报喜鸟',
-    who: '六眼小黑笠喜鹊',
+    name: 'Sussie · Six-Eyed Magpie',
+    shortName: 'Sussie',
+    title: 'Korean Minhwa Six-Eyed Magpie · Little Gat Hat Messenger',
+    who: 'Six-Eyed Magpie in a Little Gat',
     category: 'minhwa',
     group: 'minhwa',
     icon: '🐦‍⬛',
@@ -1445,8 +1445,8 @@ export const MINHWA_COMPANIONS_META = {
     earSide: 'leftEar',
     pendantKey: 'signatureProp',
     pelvis: { y: -0.4, z: 0.02, rx: 0.3, ry: 0.18, rz: 0.28, frontY: -0.36, frontZ: 0.3 },
-    hello: '喳喳！我是六眼小喜鹊苏西，飞越魂门时把小黑笠帽、蓝羽翅膀和六只金眼弄脏啦！',
-    thanks: '啾啾！六只黄金灵眼和小黑笠重新闪耀金光，喜鹊报喜，祝你天天开心！',
+    hello: 'Chirp chirp! I\'m Sussie, the six-eyed magpie. I flew under a roof, and my little Gat hat tipped and my six golden eyes got dusty. Polish me up!',
+    thanks: 'Chirp chirp chirp! Six golden eyes sparkling, little Gat hat looking sharp. Sussie brings you good luck!',
     build: buildSussieMagpie,
   },
 };

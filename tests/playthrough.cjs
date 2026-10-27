@@ -30,9 +30,9 @@ const CANONICAL_IDS = [
   await page.goto(process.env.GAME_URL || 'http://127.0.0.1:8765');
   await page.waitForFunction(() => window.__REPAIR3D__ || window.__GAME__);
 
-  assert.equal(await page.locator('html').getAttribute('lang'), 'zh-CN');
+  assert.equal(await page.locator('html').getAttribute('lang'), 'en');
 
-  // Verify bundled zh-CN-XiaoyiNeural MP3 voice clips
+  // Verify bundled en-US edge-tts MP3 voice clips
   const recordings = await page.evaluate(async () => {
     const R = window.__REPAIR3D__ || window.__GAME__;
     const clips = (R.voiceClips && R.voiceClips()) || window.VOICE_CLIPS || {};
