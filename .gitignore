@@ -1,0 +1,10 @@
+.agents/
+ORIGINAL_REQUEST.md
+BRIEFING.md
+BRIEFING_ARCHIVE.md
+PROJECT.md
+TEST_INFRA.md
+TEST_READY.md
+__pycache__/
+*.pyc
+.DS_Store

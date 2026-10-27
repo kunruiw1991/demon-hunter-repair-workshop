@@ -1,0 +1,1108 @@
+:root {
+  --glass: rgba(255, 250, 246, 0.92);
+  --ink: #2c1e3d;
+  --soft: #75638a;
+  --accent: #7c4dff;
+  --accent2: #f1e8ff;
+  --pink: #ff3d9a;
+  --gold: #f5b935;
+  --mint: #4ad6a7;
+  --cyan: #18d2e8;
+  --stage1: #3b245e;
+  --stage2: #24143d;
+  --shadow: 0 3px 0 rgba(40, 20, 70, 0.12), 0 14px 36px rgba(20, 10, 42, 0.28);
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  overflow: hidden;
+  background: #1e1533;
+  overscroll-behavior: none;
+  font-family: ui-rounded, "SF Pro Rounded", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Nunito", system-ui, sans-serif;
+  color: var(--ink);
+}
+
+#gl {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  touch-action: none;
+  cursor: grab;
+}
+
+#gl.tool {
+  cursor: none;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 26px;
+  border: 2px solid rgba(255, 255, 255, 0.72);
+  box-shadow: var(--shadow);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: none;
+  cursor: pointer;
+}
+
+button:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* Kid-friendly >= 64px primary interactive buttons */
+.round {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  border-radius: 50%;
+  background: var(--glass);
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow);
+  font-size: 25px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.22s, background 0.22s;
+}
+
+.round:hover {
+  transform: translateY(-2px);
+}
+
+.round:active {
+  transform: scale(0.92);
+}
+
+.round.off {
+  opacity: 0.45;
+}
+
+.pill {
+  height: 64px;
+  min-height: 64px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: var(--glass);
+  border: 2px solid rgba(255, 215, 102, 0.85);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  font-size: 20px;
+}
+
+.pill.pop {
+  animation: pop 0.6s ease;
+}
+
+@keyframes pop {
+  50% { transform: scale(1.18); }
+}
+
+/* Top bar & Dual Form Toggle */
+#top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  pointer-events: none;
+  z-index: 25;
+}
+
+#top > * {
+  pointer-events: auto;
+}
+
+.brand {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: var(--glass);
+  padding: 8px 18px 8px 10px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.8);
+  box-shadow: var(--shadow);
+}
+
+.brand .logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ffe27a, #ff7eb9);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+}
+
+.brand b {
+  display: block;
+  font-size: 16px;
+  color: #2c164a;
+}
+
+.brand small {
+  display: block;
+  font-size: 12px;
+  color: var(--soft);
+  font-weight: 700;
+}
+
+.right {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.form-toggle-wrap {
+  display: inline-flex;
+}
+
+.form-toggle-btn {
+  min-height: 64px;
+  padding: 0 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #fff7d6 0%, #ffe082 55%, #ffc947 100%);
+  color: #4a2600;
+  border: 3px solid #fff3c4;
+  box-shadow: 0 4px 16px rgba(245, 185, 53, 0.45), var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 900;
+  font-size: 16px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: transform 0.22s, background 0.25s, box-shadow 0.25s, color 0.25s;
+}
+
+.form-toggle-btn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.form-toggle-btn:active {
+  transform: scale(0.95);
+}
+
+.form-toggle-btn .form-icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.form-toggle-btn.awakened,
+.form-toggle-wrap.awakened .form-toggle-btn {
+  background: linear-gradient(135deg, #3b0d66 0%, #7b1fa2 52%, #d500f9 100%);
+  color: #fff6ff;
+  border-color: #ea80fc;
+  box-shadow: 0 0 22px rgba(213, 0, 249, 0.65), var(--shadow);
+}
+
+/* Home Overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: 20;
+  background: radial-gradient(ellipse at center, rgba(36, 20, 61, 0.12), rgba(24, 12, 44, 0.58));
+}
+
+.homecard {
+  width: min(960px, 94vw);
+  max-height: calc(100dvh - 104px);
+  margin-top: 68px;
+  padding: 22px 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.homecard.small {
+  width: min(420px, 90vw);
+  margin-top: 0;
+}
+
+.homecard h1 {
+  margin: 2px 0 6px;
+  font-size: clamp(24px, 3.2vw, 34px);
+  font-weight: 900;
+  color: #2c144d;
+  flex-shrink: 0;
+}
+
+.homecard p {
+  margin: 0 auto 14px;
+  max-width: 680px;
+  color: var(--soft);
+  font-size: 15px;
+  line-height: 1.45;
+  flex-shrink: 0;
+}
+
+/* Category Filter Tabs */
+.cat-tabs {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 0 auto 12px;
+  flex-shrink: 0;
+}
+
+.cat-tab {
+  min-height: 64px; /* kid-sized >= 64px tap target */
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 800;
+  font-size: 16px;
+  box-shadow: 0 2px 8px rgba(45, 25, 80, 0.1);
+  border: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.cat-tab:hover {
+  transform: translateY(-1px);
+}
+
+.cat-tab.sel {
+  background: linear-gradient(135deg, #7c4dff, #ff3d9a);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(124, 77, 255, 0.4);
+}
+
+/* Character Patient Cards */
+.patients {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+  min-height: 0;
+  overflow-y: auto;
+  align-content: flex-start;
+  padding: 6px 4px;
+}
+
+.patient {
+  position: relative;
+  width: 164px;
+  padding: 12px 10px 10px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #ffffff 0%, #faf5ff 100%);
+  border: 3px solid transparent;
+  cursor: pointer;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+  box-shadow: 0 4px 14px rgba(45, 25, 80, 0.1);
+  font: inherit;
+  color: inherit;
+}
+
+.patient:hover {
+  transform: translateY(-3px);
+}
+
+.patient.sel {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(124, 77, 255, 0.25), 0 8px 20px rgba(124, 77, 255, 0.22);
+}
+
+.patient img {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 8px;
+  object-fit: contain;
+  background: radial-gradient(circle at 50% 35%, #fff9ea, #efe2ff);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.patient b {
+  display: grid;
+  place-items: center;
+  font-size: 15px;
+  min-height: 34px;
+  line-height: 1.2;
+}
+
+.patient span {
+  display: block;
+  color: var(--soft);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.patient .sz-badge {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: #f0e6ff;
+  color: #5e2ca5;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.patient .st {
+  height: 16px;
+  margin-top: 3px;
+  color: #e6a100;
+  font-size: 13px;
+}
+
+.home-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-top: 4px;
+  flex-shrink: 0;
+}
+
+.cta {
+  min-height: 64px;
+  background: linear-gradient(135deg, #7c4dff 0%, #ff3d9a 100%);
+  color: #fff;
+  font-weight: 900;
+  font-size: 20px;
+  padding: 14px 36px;
+  border-radius: 999px;
+  box-shadow: 0 6px 20px rgba(124, 77, 255, 0.45);
+  transition: transform 0.2s;
+}
+
+.cta.small {
+  min-height: 64px;
+  font-size: 18px;
+  padding: 12px 28px;
+}
+
+.cta:active {
+  transform: scale(0.96);
+}
+
+.ghost {
+  min-height: 64px;
+  background: #fff;
+  font-weight: 800;
+  padding: 14px 24px;
+  border-radius: 999px;
+  box-shadow: var(--shadow);
+}
+
+.voice-preview {
+  font-size: 15px;
+}
+
+/* Repair Checklist Ticket */
+#ticket {
+  position: fixed;
+  left: 18px;
+  top: 90px;
+  width: 262px;
+  max-height: calc(100dvh - 228px);
+  overflow-y: auto;
+  padding: 16px 16px 14px;
+  z-index: 9;
+}
+
+.tk-head {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  min-width: 0;
+}
+
+.tk-head > div {
+  min-width: 0;
+}
+
+.tk-head img {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #fffdf7;
+  box-shadow: 0 0 0 3px #fff;
+}
+
+.tk-head b {
+  display: block;
+  font-size: 17px;
+  overflow-wrap: anywhere;
+}
+
+.tk-head small {
+  color: var(--soft);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tk-title {
+  margin: 12px 0 8px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--soft);
+}
+
+#chips {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 48px; /* comfortable tap height for small fingers without overflowing the checklist */
+  padding: 8px 12px;
+  border-radius: 16px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 800;
+  font-size: 15px;
+}
+
+.chip:hover {
+  transform: translateX(2px);
+  box-shadow: 0 2px 8px rgba(124, 77, 255, 0.16);
+}
+
+.chip i {
+  font-style: normal;
+  font-size: 20px;
+  width: 26px;
+  text-align: center;
+}
+
+.chip .n {
+  margin-left: auto;
+  min-width: 26px;
+  height: 26px;
+  border-radius: 13px;
+  background: var(--accent2);
+  color: #4a2594;
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.chip.done {
+  opacity: 0.52;
+  background: transparent;
+  text-decoration: line-through;
+}
+
+.chip.done .n {
+  background: var(--mint);
+  color: #fff;
+}
+
+.chip.flash {
+  box-shadow: 0 0 0 3px var(--gold);
+}
+
+.heart-meter {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.heart-meter .bar {
+  flex: 1;
+  height: 12px;
+  border-radius: 6px;
+  background: #ede2f7;
+  overflow: hidden;
+}
+
+#heartFill {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, #ff7eb9, #ff3d9a, #ffd54f);
+  transition: width 0.6s ease;
+}
+
+.tk-tip {
+  margin-top: 9px;
+  font-size: 12px;
+  color: var(--soft);
+  font-weight: 700;
+}
+
+/* Turntable buttons */
+#turn {
+  position: fixed;
+  right: 18px;
+  top: 52%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 9;
+}
+
+/* Toolbox & Dress-up Drawers (>= 64px tool faces) */
+#toolbox, #dress {
+  position: fixed;
+  left: 50%;
+  bottom: 12px;
+  transform: translateX(-50%);
+  z-index: 9;
+  width: max-content;
+  max-width: 98vw;
+}
+
+.drawer {
+  display: flex;
+  gap: 9px;
+  padding: 12px 14px 10px;
+  border-radius: 28px;
+  max-width: 98vw;
+  background: linear-gradient(180deg, #4b2d7f 0%, #2f1a57 100%);
+  border: 2px solid rgba(255, 215, 115, 0.55);
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.28), inset 0 -4px 0 rgba(0, 0, 0, 0.28), var(--shadow);
+  overflow-x: auto;
+}
+
+.tool {
+  flex: 0 0 auto;
+  width: 74px;
+  min-width: 66px;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.tool .face {
+  width: 66px;
+  height: 66px;
+  min-width: 64px;
+  min-height: 64px;
+  border-radius: 20px;
+  background: #fffaf4;
+  display: grid;
+  place-items: center;
+  font-size: 36px;
+  border: 3px solid transparent;
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.22);
+  transition: transform 0.22s, border-color 0.22s, background 0.22s;
+}
+
+.tool span {
+  font-size: 11px;
+  font-weight: 800;
+  color: #fff8eb;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  white-space: nowrap;
+}
+
+.tool.sel .face {
+  border-color: var(--gold);
+  transform: translateY(-6px);
+  background: #ffffff;
+  box-shadow: 0 6px 14px rgba(245, 185, 53, 0.45);
+}
+
+.tool.wiggle .face {
+  animation: wiggle 0.9s ease;
+}
+
+.tool.glow .face {
+  animation: glow 1.6s ease-in-out infinite;
+}
+
+.tool.heart .face {
+  background: linear-gradient(135deg, #fff0f6, #ffe0ec);
+  border-color: #ff69b4;
+}
+
+@keyframes wiggle {
+  0%, 100% { transform: rotate(0); }
+  20% { transform: rotate(-12deg); }
+  40% { transform: rotate(10deg); }
+  60% { transform: rotate(-7deg); }
+  80% { transform: rotate(4deg); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(255, 61, 154, 0); }
+  50% { box-shadow: 0 3px 0 rgba(0, 0, 0, 0.2), 0 0 0 9px rgba(255, 61, 154, 0.5); }
+}
+
+#dress .drawer {
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 18px;
+}
+
+.dress-title {
+  color: #ffe89e;
+  font-weight: 900;
+  font-size: 16px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+#dress .row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#dress .tool.sel .face {
+  border-color: var(--mint);
+}
+
+/* Speech bubble, tool cursor & toast */
+#bubble {
+  position: fixed;
+  z-index: 8;
+  transform: translate(-50%, -100%);
+  background: #fff;
+  padding: 10px 16px;
+  border-radius: 20px;
+  font-weight: 800;
+  font-size: 16px;
+  max-width: 300px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  transition: opacity 0.35s;
+}
+
+#bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  margin-left: -9px;
+  border: 9px solid transparent;
+  border-bottom: 0;
+  border-top-color: #fff;
+}
+
+#cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 12;
+  pointer-events: none;
+  font-size: 56px;
+  transform: translate(-30%, -70%);
+  filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.35));
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+#toast {
+  position: fixed;
+  left: 50%;
+  top: 92px;
+  transform: translateX(-50%);
+  z-index: 11;
+  background: var(--glass);
+  padding: 10px 22px;
+  border-radius: 999px;
+  font-weight: 800;
+  box-shadow: var(--shadow);
+}
+
+/* Before / After Photo Card */
+.card {
+  width: min(580px, 92vw);
+  padding: 24px 24px 20px;
+  text-align: center;
+}
+
+.card h2 {
+  margin: 0 0 6px;
+  font-size: 28px;
+  color: #2c144d;
+}
+
+.card p {
+  margin: 0 0 14px;
+  color: var(--soft);
+  font-weight: 700;
+}
+
+.ba {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.ba figure {
+  margin: 0;
+  flex: 1;
+}
+
+.ba img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 0 0 4px #fff, 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.ba figcaption {
+  margin-top: 6px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.8px;
+  color: var(--soft);
+}
+
+.btnrow {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Floating Fart & 3D Mushroom-Cloud Mega Fart Button */
+#fartBtn {
+  position: fixed;
+  right: 18px;
+  top: 90px;
+  z-index: 9;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 124px;
+  min-height: 68px;
+  padding: 10px 14px 9px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, #fffef6 0%, #eef9d8 100%);
+  border: 3px solid #9ad94b;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s, border-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+
+#fartBtn:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+
+#fartBtn:active {
+  transform: scale(0.93);
+}
+
+#fartBtn .fart-icon {
+  font-size: 28px;
+  line-height: 1;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.15));
+}
+
+#fartBtn .fart-info {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+#fartBtn .fart-info b {
+  font-size: 14px;
+  font-weight: 900;
+  color: #3d5a16;
+}
+
+#fartBtn .fart-info small {
+  font-size: 13px;
+  font-weight: 900;
+  color: #5a7d24;
+  background: rgba(154, 217, 75, 0.28);
+  padding: 1px 7px;
+  border-radius: 999px;
+}
+
+#fartBtn .fart-bar {
+  width: 100%;
+  height: 8px;
+  border-radius: 999px;
+  background: #dfe8ce;
+  overflow: hidden;
+}
+
+#fartBtn .fart-bar i {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #8ce038, #f3c14d);
+  transition: width 0.25s ease;
+}
+
+#fartBtn.mega {
+  background: linear-gradient(180deg, #fff6d6 0%, #ffd875 100%);
+  border-color: #ff7b29;
+  animation: megaPulse 0.9s ease-in-out infinite;
+}
+
+#fartBtn.mega .fart-info b {
+  color: #8c2d00;
+}
+
+#fartBtn.mega .fart-info small {
+  background: #ff7b29;
+  color: #fff;
+}
+
+#fartBtn.mega .fart-bar i {
+  background: linear-gradient(90deg, #ff922b, #ff3b30);
+}
+
+@keyframes megaPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(255, 123, 41, 0.45), var(--shadow);
+  }
+  50% {
+    transform: scale(1.07);
+    box-shadow: 0 0 0 10px rgba(255, 123, 41, 0), 0 8px 26px rgba(255, 95, 20, 0.45);
+  }
+}
+
+/* Tablet / iPad Landscape (<= 1024px) */
+@media (max-width: 1024px) {
+  #ticket {
+    width: 224px;
+    top: 86px;
+    padding: 12px;
+  }
+  .chip {
+    font-size: 13px;
+  }
+  .brand small {
+    display: none;
+  }
+  .tool {
+    width: 68px;
+  }
+  .tool .face {
+    width: 64px;
+    height: 64px;
+    font-size: 32px;
+  }
+}
+
+/* Mobile Portrait (<= 600px, e.g. 390x844) */
+@media (max-width: 600px) {
+  #top {
+    padding: 8px 6px;
+    gap: 6px;
+  }
+  /* Phones: icon-only brand pill so the Dual Form pill, star pill and sound buttons share one row
+     (the 12px title used to squeeze "舞台金光形态" into a 6-line vertical stack over the home card). */
+  .brand {
+    padding: 4px;
+    gap: 0;
+    flex-shrink: 0;
+  }
+  .brand .logo {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+  .brand > div {
+    display: none;
+  }
+  .right {
+    gap: 4px;
+    flex-shrink: 0;
+  }
+  .form-toggle-btn {
+    min-height: 48px;
+    padding: 0 9px;
+    font-size: 12px;
+    gap: 4px;
+  }
+  .form-toggle-btn .form-icon {
+    font-size: 16px;
+  }
+  .round {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    min-height: 48px;
+    font-size: 20px;
+  }
+  .pill {
+    height: 48px;
+    min-height: 48px;
+    padding: 0 10px;
+    font-size: 14px;
+  }
+  .homecard {
+    width: 94vw;
+    max-height: calc(100dvh - 76px);
+    margin-top: 54px;
+    padding: 14px 10px 12px;
+  }
+  .homecard h1 {
+    font-size: 20px;
+  }
+  .homecard p {
+    font-size: 12px;
+    margin-bottom: 8px;
+  }
+  .cat-tabs {
+    gap: 5px;
+    margin-bottom: 8px;
+  }
+  .cat-tab {
+    min-height: 44px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .patients {
+    gap: 6px;
+    margin-bottom: 10px;
+    padding: 2px;
+  }
+  .patient {
+    width: calc(33.33% - 6px);
+    max-width: 112px;
+    padding: 7px 4px;
+    border-radius: 16px;
+  }
+  .patient img {
+    width: 54px;
+    height: 54px;
+    margin-bottom: 5px;
+  }
+  .patient b {
+    font-size: 11px;
+    min-height: 26px;
+  }
+  .patient span {
+    font-size: 10px;
+  }
+  .patient .sz-badge {
+    font-size: 9px;
+    padding: 1px 5px;
+  }
+  .cta {
+    min-height: 48px;
+    font-size: 16px;
+    padding: 10px 24px;
+  }
+  .ghost.voice-preview {
+    min-height: 42px;
+    font-size: 12px;
+    padding: 8px 14px;
+  }
+  #ticket {
+    left: 8px;
+    top: 58px;
+    width: 152px;
+    padding: 8px;
+    max-height: calc(100dvh - 190px);
+  }
+  .tk-head img {
+    width: 30px;
+    height: 30px;
+  }
+  .tk-head b {
+    font-size: 12px;
+  }
+  .tk-head small {
+    font-size: 10px;
+  }
+  .chip {
+    gap: 4px;
+    font-size: 11px;
+    padding: 5px 6px;
+  }
+  .chip i {
+    font-size: 15px;
+    width: 18px;
+  }
+  .chip .n {
+    min-width: 20px;
+    height: 20px;
+    font-size: 11px;
+  }
+  #turn {
+    right: 8px;
+  }
+  #fartBtn {
+    right: 8px;
+    top: 58px;
+    min-width: 96px;
+    min-height: 54px;
+    padding: 6px 9px;
+    border-radius: 16px;
+  }
+  #fartBtn .fart-icon {
+    font-size: 22px;
+  }
+  #fartBtn .fart-info b {
+    font-size: 11px;
+  }
+  #fartBtn .fart-info small {
+    font-size: 10px;
+    padding: 1px 5px;
+  }
+  .drawer {
+    gap: 6px;
+    padding: 9px 10px;
+  }
+  .tool {
+    width: 66px;
+    min-width: 64px;
+  }
+  .tool .face {
+    width: 64px;
+    height: 64px;
+    min-width: 64px;
+    min-height: 64px;
+    font-size: 30px;
+  }
+  .tool span {
+    font-size: 10px;
+  }
+  #bubble {
+    font-size: 13px;
+    max-width: 210px;
+  }
+}

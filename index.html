@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="KPop Demon Hunters Repair 3D">
+<meta name="theme-color" content="#1e1533">
+<title>猎魔女团与呆萌蓝虎修复工坊 3D · KPop Demon Hunters Repair Workshop 3D</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<canvas id="gl"></canvas>
+
+<!-- Top bar / Stage HUD -->
+<header id="top">
+  <div class="brand">
+    <span class="logo">🗡️</span>
+    <div>
+      <b>猎魔女团与呆萌蓝虎修复工坊 3D</b>
+      <small>HUNTR/X · Saja Boys · 民画福虎与六眼喜鹊</small>
+    </div>
+  </div>
+  <div class="right">
+    <div id="formBtn" class="form-toggle-wrap">
+      <button type="button" id="formToggleBtn" class="form-toggle-btn" data-role="dual-form-toggle" title="切换舞台金光形态 / 猎魔冥界觉醒形态">
+        <span class="form-icon" id="formIcon">✨</span>
+        <span class="form-text" id="formLabel">舞台金光形态</span>
+      </button>
+    </div>
+    <div class="pill" id="starPill">⭐ <span id="stars">0</span></div>
+    <button type="button" class="round" id="musicBtn" title="背景音乐">🎵</button>
+    <button type="button" class="round" id="soundBtn" title="音效和语音">🔊</button>
+    <button type="button" class="round hidden" id="pauseBtn" title="暂停">⏸</button>
+    <button type="button" class="round hidden" id="stopBtn" title="返回选伙伴">⏹</button>
+  </div>
+</header>
+
+<!-- Home character selector -->
+<section id="home" class="overlay">
+  <div class="homecard glass">
+    <h1>今天帮哪位舞台伙伴修复？</h1>
+    <p>演唱会与猎魔巡演归来，<b>HUNTR/X 猎魔女团</b>、<b>Saja Boys 狮男团</b> 与 <b>呆萌蓝虎、六眼小喜鹊</b> 身上沾了灰尘，法器与演出服也需要护理啦！快选一位伙伴照顾它吧！</p>
+    <div class="cat-tabs" id="catTabs">
+      <button type="button" class="cat-tab sel" data-cat="all">✨ 全部伙伴 (10)</button>
+      <button type="button" class="cat-tab" data-cat="huntrx">🎤 HUNTR/X 猎魔女团 (3)</button>
+      <button type="button" class="cat-tab" data-cat="saja_boys" data-cat-alias="saja">🕺 Saja Boys 狮男团 (5)</button>
+      <button type="button" class="cat-tab" data-cat="minhwa">🐯 民画福虎与喜鹊 (2)</button>
+    </div>
+    <div class="patients" id="patients"></div>
+    <div class="home-actions">
+      <button type="button" class="cta" id="startBtn">▶ 开始修理</button>
+      <button type="button" class="ghost voice-preview" id="voicePreviewBtn">🎀 试听中文声音</button>
+    </div>
+  </div>
+</section>
+
+<!-- In-game Repair Checklist HUD -->
+<aside id="ticket" class="glass hidden">
+  <div class="tk-head">
+    <img id="tkIcon" alt="">
+    <div>
+      <b id="tkName"></b>
+      <small id="tkWho"></small>
+    </div>
+  </div>
+  <div class="tk-title">魂门舞台修复清单</div>
+  <div id="chips"></div>
+  <div class="heart-meter">
+    <span>💗</span>
+    <div class="bar"><div id="heartFill"></div></div>
+  </div>
+  <div class="tk-tip">点一点清单，转盘就会转到要修的地方！</div>
+</aside>
+
+<!-- Turntable controls -->
+<div id="turn" class="hidden">
+  <button type="button" class="round" id="rotL" title="向左转">⟲</button>
+  <button type="button" class="round" id="zoomBtn" title="放大或缩小">🔍</button>
+  <button type="button" class="round" id="rotR" title="向右转">⟳</button>
+</div>
+
+<!-- Floating Fart & 3D Mushroom-Cloud Mega Fart Button -->
+<button type="button" id="fartBtn" class="glass hidden" title="放小屁蓄力蘑菇云大屁">
+  <span class="fart-icon" id="fartIcon">💨</span>
+  <span class="fart-info">
+    <b id="fartLabel">放小屁</b>
+    <small id="fartCount">0/10</small>
+  </span>
+  <span class="fart-bar"><i id="fartFill"></i></span>
+</button>
+
+<!-- Repair Toolbox Drawer -->
+<nav id="toolbox" class="hidden">
+  <div class="drawer" id="tools"></div>
+</nav>
+
+<!-- Idol Dress-Up Drawer -->
+<nav id="dress" class="hidden">
+  <div class="drawer">
+    <div class="dress-title">✨ 选一件星光舞台配饰</div>
+    <div class="row" id="dressItems"></div>
+    <button type="button" class="cta small" id="shelfBtn">🏠 去魂门星光展台</button>
+  </div>
+</nav>
+
+<div id="bubble" class="hidden"></div>
+<div id="cursor"></div>
+<div id="toast" class="hidden"></div>
+
+<section id="pauseVeil" class="overlay hidden">
+  <div class="glass homecard small">
+    <h1>休息一小会儿</h1>
+    <button type="button" class="cta" id="resumeBtn">▶ 继续玩</button>
+  </div>
+</section>
+<section id="endVeil" class="overlay hidden"></section>
+
+<script src="js/vendor/three.min.js"></script>
+<script type="module" src="js/game.js"></script>
+</body>
+</html>
